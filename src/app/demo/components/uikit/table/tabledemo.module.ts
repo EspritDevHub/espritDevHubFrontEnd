@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TableDemoComponent } from './tabledemo.component';
+import {forkJoin} from "rxjs";
+
+
 import { TableDemoRoutingModule } from './tabledemo-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -14,24 +16,26 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
+import {TabledemoComponent} from "./tabledemo.component";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		TableDemoRoutingModule,
-		FormsModule,
-		TableModule,
-		RatingModule,
-		ButtonModule,
-		SliderModule,
-		InputTextModule,
-		ToggleButtonModule,
-		RippleModule,
-		MultiSelectModule,
-		DropdownModule,
-		ProgressBarModule,
-		ToastModule
-	],
-	declarations: [TableDemoComponent]
+    imports: [
+        CommonModule,
+        TableDemoRoutingModule,
+        FormsModule,
+        TableModule,
+        RatingModule,
+        ButtonModule,
+        SliderModule,
+        InputTextModule,
+        ToggleButtonModule,
+        RippleModule,
+        MultiSelectModule,
+        DropdownModule,
+        ProgressBarModule,
+        ToastModule,
+
+    ],
+    declarations: [TabledemoComponent]  // Correction ici
 })
 export class TableDemoModule { }
