@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ListProjectComponent } from './demo/components/ProjectComponents/list-project/list-project.component';
+
 
 
 @NgModule({
@@ -28,8 +28,8 @@ import { ListProjectComponent } from './demo/components/ProjectComponents/list-p
         TableModule,
         ButtonModule,
         InputTextModule,
-        ReactiveFormsModule,
-        ListProjectComponent
+        ReactiveFormsModule
+
 
 
     ],

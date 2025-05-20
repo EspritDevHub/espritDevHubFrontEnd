@@ -1,0 +1,51 @@
+<div class="card">
+    <span class="block text-900 font-bold text-xl mb-4">Ajouter un Projet</span>
+    <form (ngSubmit)="updateProjet()" #projectForm="ngForm" class="grid">
+        <!-- Left Column: Main Inputs -->
+        <div class="col-12 lg:col-8">
+            <div class="flex flex-column p-fluid">
+                <div class="mb-4">
+                    <label for="code" class="block text-900 font-semibold mb-2">Code</label>
+                    <input type="text" pInputText id="code" name="code" [(ngModel)]="projet.code" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="titre" class="block text-900 font-semibold mb-2">Titre</label>
+                    <input type="text" pInputText id="titre" name="titre" [(ngModel)]="projet.titre" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="description" class="block text-900 font-semibold mb-2">Description</label>
+                    <textarea pInputTextarea id="description" name="description" [(ngModel)]="projet.description" rows="5" [autoResize]="true"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Dates & Buttons -->
+        <div class="col-12 lg:col-4">
+            <div class="border-1 surface-border border-round p-fluid mb-4">
+                <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Détails du Projet</span>
+                <div class="p-3">
+                    <div class="mb-4">
+                        <label for="dateDebut" class="block text-900 font-semibold mb-2">Date Début</label>
+                        <input type="date" pInputText id="dateDebut" name="dateDebut" [(ngModel)]="projet.dateDebut" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="dateFinPrevu" class="block text-900 font-semibold mb-2">Date Fin Prévue</label>
+                        <input type="date" pInputText id="dateFinPrevu" name="dateFinPrevu" [(ngModel)]="projet.dateFinPrevu" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-content-between gap-3">
+                <button pButton pRipple type="button" class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-fw pi-times"></button>
+                <button pButton pRipple type="submit" class="p-button-primary flex-1" label="Modifier" icon="pi pi-fw pi-check"></button>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+

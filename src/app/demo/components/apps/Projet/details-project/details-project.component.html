@@ -1,0 +1,26 @@
+<div *ngIf="projet">
+    <h2>Détails du Projet : {{ projet.titre }}</h2>
+    <p><strong>Code :</strong> {{ projet.code }}</p>
+    <p><strong>Description :</strong> {{ projet.description }}</p>
+    <p><strong>État :</strong> {{ projet.etat || 'N/A' }}</p>
+    <p><strong>Étape :</strong> {{ projet.etapeProjet || 'N/A' }}</p>
+    <p><strong>Date Début :</strong> {{ projet.dateDebut | date: 'shortDate' }}</p>
+    <p><strong>Date Fin Prévue :</strong> {{ projet.dateFinPrevu | date: 'shortDate' }}</p>
+    <p><strong>Créé par :</strong> {{ projet.createdBy }}</p>
+    <p><strong>Date de Création :</strong> {{ projet.creationDate || 'Non définie' }}</p>
+
+    <div *ngIf="projet.jalons && projet.jalons.length > 0">
+        <h3>Jalons</h3>
+        <ul>
+            <li *ngFor="let jalon of projet.jalons">
+                <strong>{{ jalon.nom }}</strong> :
+                du {{ jalon.dateDebut | date: 'shortDate' }} au {{ jalon.dateFin | date: 'shortDate' }}
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="!projet.jalons || projet.jalons.length === 0">
+        <p><em>Aucun jalon défini pour ce projet.</em></p>
+    </div>
+</div>
+

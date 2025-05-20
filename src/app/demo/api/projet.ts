@@ -12,8 +12,8 @@ export interface Projet {
     etat: EtatProjetEnum;
     etapeProjet: EtapeProjetEnum;
 
-    dateDebut: string;        // Format ISO ex: '2025-05-10'
-    dateFinPrevu: string;
+    dateDebut: Date;        // Format ISO ex: '2025-05-10'
+    dateFinPrevu: Date;
 
     groupeId: string;
     encadrantId: string;
@@ -21,7 +21,7 @@ export interface Projet {
     jalons: Jalon[];
 
     createdBy: number;
-    creationDate: string;     // Format ISO
+    creationDate: Date;     // Format ISO
 }
 
 // Utilisé seulement si le backend retourne des tâches associées

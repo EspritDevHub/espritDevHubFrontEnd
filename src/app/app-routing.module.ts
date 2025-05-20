@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import {TabledemoComponent} from "./demo/components/uikit/table/tabledemo.component";
-import { ListProjectComponent } from './demo/components/ProjectComponents/list-project/list-project.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -24,7 +23,6 @@ const routes: Routes = [{ path: 'table-demo', component: TabledemoComponent },
             { path: 'blocks', data: { breadcrumb: 'Prime Blocks' }, loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
             { path: 'ecommerce', data: { breadcrumb: 'E-Commerce' }, loadChildren: () => import('./demo/components/ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
             { path: 'apps', data: { breadcrumb: 'Apps' }, loadChildren: () => import('./demo/components/apps/apps.module').then(m => m.AppsModule) },
-            { path: "listProject", component: ListProjectComponent },
         ]
     },
     { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
