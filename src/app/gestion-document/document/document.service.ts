@@ -16,14 +16,14 @@ export class DocumentService {
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'X-User-ID': "EUT12165451",
+      'X-User-ID': "EUT12165452",
       'Content-Type': 'application/json'
     });
   }
 
   private getFileUploadHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'X-User-ID': "EUT12165451"
+      'X-User-ID': "EUT12165452"
     });
   }
 
@@ -45,7 +45,7 @@ getSubmittedDocumentsBySeance(seanceId: string): Observable<Document[]> {
   }
   submitDocument(dto: DocumentDto ): Observable<any> {
     const headers = new HttpHeaders({
-      'X-User-ID': "EUT12165451",
+      'X-User-ID': "EUT1216542",
       'Content-Type': 'application/json'
     });
 

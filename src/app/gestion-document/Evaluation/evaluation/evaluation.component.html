@@ -17,6 +17,16 @@
                 🔗 {{ doc.nomFichier }}
               </a>
   
+              <div *ngIf="doc.type === 'LIEN' " class="p-mt-2">
+                <button 
+                  pButton 
+                  type="button" 
+                  label="📊 Générer Évaluation Code"
+                  class="p-button-warning" 
+                  (click)="evaluateGitLink(doc)">
+                </button>
+              </div>
+              
               <!-- DOCUMENT : PDF ou TXT -->
               <ng-container *ngSwitchCase="'DOCUMENT'">
                 <!-- PDF -->
@@ -53,23 +63,60 @@
           </div>
   
           <!-- Évaluation -->
-          <div class="p-grid p-formgrid p-fluid p-align-center">
-            <div class="p-field p-col-12 p-md-3">
-              <label>Note</label>
-              <input type="number" pInputText [(ngModel)]="doc.note" min="0" max="20" />
-            </div>
+      <!-- Évaluation -->
+
+
+<div class="p-grid p-formgrid p-fluid p-align-center">
+    <div class="p-field p-col-12 p-md-3">
+      <label>Note</label>
+      <input type="number"
+             pInputText
+             [(ngModel)]="doc.note"
+             min="0"
+             max="20"
+             [readonly]="doc.type === 'TEXTE' && doc.note != null"
+             style="background-color: #110202;" />
+    </div>
   
-            <div class="p-field p-col-12 p-md-6">
-              <label>Suggestion</label>
-              <input type="text" pInputText [(ngModel)]="doc.suggestion" placeholder="Ex: Bon travail, mais améliore le format SQL..." />
-            </div>
-  
-            <div class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
-              <button pButton type="button" label="✅ Évaluer" class="p-button-success" (click)="submitEvaluation(doc)"></button>
-            </div>
-          </div>
-  
-        </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label>Commentaire:</label>
+      <input type="text"
+             pInputText
+             [(ngModel)]="doc.commentaire"
+             [readonly]="doc.type === 'TEXTE' && doc.commentaire"
+             placeholder="Ce qui Manque / Ce qui est fait ..."
+             style="background-color: #110202;" />
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+        <label>Suggestion:</label>
+        <input type="text"
+               pInputText
+               [(ngModel)]="doc.suggestion"
+               [readonly]="doc.type === 'TEXTE' && doc.suggestion"
+               placeholder="Ce qui Manque / Ce qui est fait ..."
+               style="background-color: #110202;" />
+      </div>
+      <div *ngIf="doc.type === 'TEXTE'" class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
+        <button 
+          pButton
+          type="button"
+          label="📊 Générer Évaluation"
+          class="p-button-info"
+          (click)="SuggestEvaluationText(doc)">
+        </button>
+      </div>
+      
+      
+      <div class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
+        <button 
+        pButton 
+        type="button" 
+        label="Evaluer Finalement Etudiant selon ses rendu " 
+        class="p-button-success p-mb-5" 
+        (click)="goToSeancesList()">
+        
+      </button>
+      
       </div>
     </div>
   </div>

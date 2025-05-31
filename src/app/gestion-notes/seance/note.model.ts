@@ -1,6 +1,7 @@
 export interface Note {
     id?: string;
-    seanceId?: string;
+    seanceId?: string;    assignmentId?: string;
+
     sprintId?: string;
     critereId?: string;
     etudiantId: string;
