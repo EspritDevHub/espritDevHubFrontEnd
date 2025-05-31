@@ -47,6 +47,16 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/apps/assignment/list']
                             },
                             {
+                                label: 'Calendar-Assignments',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/assignment/calendar']
+                            },
+                            {
+                                label: "AIDE à L'Evaluation",
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/evaluations/list']
+                            },
+                            {
                                 label: 'Etudiant-Documents',
                                 icon: 'pi pi-fw pi-list',
                                 routerLink: ['/apps/documents/list']

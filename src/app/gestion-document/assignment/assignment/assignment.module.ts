@@ -22,12 +22,21 @@ import { AssignmentListComponent } from './assignment.component';
 import { AssignmentRoutingModule } from '../assignment-routing.module';
 import { TagModule } from 'primeng/tag';
 import { CalendarModule } from 'primeng/calendar';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AssignmentCalendarComponent } from '../assignment-calendar/assignment-calendar.component';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
+
 
 @NgModule({
   declarations: [
-    AssignmentListComponent,
+    AssignmentListComponent,AssignmentCalendarComponent
   ],
-  imports: [
+
+
+
+  imports: [FullCalendarModule,
      CommonModule,
         TableModule,
         FileUploadModule,

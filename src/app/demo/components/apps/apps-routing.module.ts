@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
         { path: 'notes', data: { breadcrumb: 'Apps' },loadChildren: () => import('../../../gestion-notes/note/note/note.module').then(m => m.NoteModule) },
         { path: 'assignment', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-document/assignment/assignment/assignment.module').then(m => m.AssignmentModule) },
         { path: 'documents', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-document/document/document/document.module').then(m => m.DocumentModule) },
+        { path: 'evaluations', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-document/Evaluation/Evaluation.module').then(m => m.EvaluationModule) },
 
         //{ path: 'calendar', data: { breadcrumb: 'Calendar' }, loadChildren: () => import('./calendar/calendar.app.module').then(m => m.CalendarAppModule) },
         //{ path: 'tasklist', data: { breadcrumb: 'Task List' }, loadChildren: () => import('./tasklist/tasklist.app.module').then(m => m.TaskListAppModule) },

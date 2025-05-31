@@ -6,6 +6,9 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { SeanceComponent } from './gestion-notes/seance/seance/seance.component';
 import { SeanceModule } from './gestion-notes/seance/seance.module';
 import { EvaluationComponent } from './gestion-document/Evaluation/evaluation/evaluation.component';
+import { AssignmentCalendarComponent } from './gestion-document/assignment/assignment-calendar/assignment-calendar.component';
+import { CalendarAppModule } from './demo/components/apps/calendar/calendar.app.module';
+import { FullCalendarModule } from '@fullcalendar/angular';
  
 
 @NgModule({
@@ -17,7 +20,7 @@ import { EvaluationComponent } from './gestion-document/Evaluation/evaluation/ev
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,CalendarAppModule,FullCalendarModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
