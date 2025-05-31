@@ -59,4 +59,16 @@
   <h3 class="p-mt-3">Moyenne générale: 
     <span class="p-text-bold">{{ moyenne | number: '1.2-2' }}</span>
   </h3>
-  
+  <h3 class="p-mt-5">Suggestions de cours selon vos performances :</h3>
+<div *ngFor="let matiere of recommandationsParMatiere | keyvalue" class="p-mb-4">
+  <h4>
+    Votre niveau dans la matière <strong>{{ matiere.key }}</strong> est 
+    <span class="p-text-bold">{{ matiere.value.niveau }}</span>
+  </h4>
+  <ul>
+    <li *ngFor="let cours of matiere.value.cours">
+      <strong>{{ cours.titre }}</strong> - {{ cours.description }}<br />
+      <a [href]="cours.lien" target="_blank">{{ cours.lien }}</a>
+    </li>
+  </ul>
+</div>

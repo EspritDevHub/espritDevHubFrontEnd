@@ -36,4 +36,8 @@ export class NoteService {
   getById(id: string): Observable<SeanceDTO> {
     return this.http.get<SeanceDTO>(`${this.apiUrl}/${id}`);
   }
+
+getRecommandations(matiere: string, note: number): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/recommendations?matiere=${encodeURIComponent(matiere)}&note=${note}`);
+}
 }

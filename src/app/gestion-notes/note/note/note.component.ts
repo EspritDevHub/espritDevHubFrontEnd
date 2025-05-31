@@ -12,6 +12,7 @@ export class NoteComponent implements OnInit {
   etudiantId = 'EUT12165451';
   notes: (Note & { seance?: SeanceDTO & { criteres?: any[] } })[] = [];
   moyenne: number = 0;
+  recommandationsParMatiere: Record<string, { niveau: string, cours: any[] }> = {};
 
   constructor(
     private noteService: NoteService,
@@ -26,13 +27,23 @@ export class NoteComponent implements OnInit {
       this.notes.forEach(note => {
         this.seanceService.getCriteresBySeanceId(note.seanceId).subscribe(seanceWithCritere => {
           note.seance = seanceWithCritere;
-          
+
+          // Gestion des critères
           if (note.seance?.criteres) {
             note.seance.criteres.forEach(critere => {
-              critere.note = this.notes.find(n => 
-                n.seanceId === note.seanceId && 
+              critere.note = this.notes.find(n =>
+                n.seanceId === note.seanceId &&
                 n.critereId === critere.id
               )?.valeur;
+            });
+          }
+
+          // Appeler les recommandations par séance (si matiere identifiable)
+          const matiere = note.seance?.titre;
+          if (matiere && !(matiere in this.recommandationsParMatiere)) {
+            this.noteService.getRecommandations(matiere, note.valeur).subscribe(cours => {
+              const niveau = this.getNiveauFromNote(note.valeur);
+              this.recommandationsParMatiere[matiere] = { niveau, cours };
             });
           }
         });
@@ -40,16 +51,21 @@ export class NoteComponent implements OnInit {
     });
   }
 
-  // Méthode pour récupérer la note spécifique à un critère
-  getNoteForCritere(note: any, critereId: string): number | undefined {
-    if (!note.seance?.criteres) return undefined;
-    const critere = note.seance.criteres.find((c: { id: string; }) => c.id === critereId);
-    return critere?.note;
-  }
-
   calculerMoyenne() {
     if (this.notes.length === 0) return;
     const total = this.notes.reduce((acc, note) => acc + note.valeur, 0);
     this.moyenne = total / this.notes.length;
+  }
+
+  getNoteForCritere(note: any, critereId: string): number | undefined {
+    if (!note.seance?.criteres) return undefined;
+    const critere = note.seance.criteres.find((c: { id: string }) => c.id === critereId);
+    return critere?.note;
+  }
+
+  getNiveauFromNote(note: number): string {
+    if (note >= 15) return 'Avancé';
+    if (note >= 10) return 'Intermédiaire';
+    return 'Débutant';
   }
 }
