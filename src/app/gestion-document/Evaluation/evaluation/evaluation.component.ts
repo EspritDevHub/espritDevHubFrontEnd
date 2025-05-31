@@ -147,5 +147,17 @@ console.log("cc",doc.nomFichier)
       }
     });
   }
+
+  evaluateCahierCharge(doc: any) {
+    
+    this.evaluationService.evaluatePdf("http://localhost:9096/test.pdf").subscribe((result) => {
+      doc.note = result.note;
+      doc.commentaire = result.commentaire;
+      doc.suggestion = result.suggestion;
+    }, (err) => {
+      console.error('Erreur lors de l’évaluation PDF:', err);
+    });
+  }
+  
   
 }

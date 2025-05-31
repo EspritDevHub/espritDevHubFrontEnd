@@ -10,6 +10,7 @@ export class EvaluationService {
   private documentApiUrl = 'http://localhost:9096/api/documents';
   private evaluationApiUrl = 'http://localhost:9096/api/evaluations';
   private aiApiUrl = 'http://localhost:9096/api/evaluations/evaluer-text';
+   pdfUrl :string = "http://localhost:4200/assets/test.pdf";
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +19,15 @@ export class EvaluationService {
     return this.http.post<any>('http://localhost:9096/api/evaluations/analyser-git', gitLink );
   }
 
+  evaluatePdf(pdfUrl: string): Observable<any> {
+    const payload = { pdfUrl }; 
+    return this.http.post<any>(
+      'http://localhost:9096/api/evaluations/analyse-pdf',
+      payload,
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+  
   
   getAllDocuments(): Observable<any[]> {
     return this.http.get<any[]>(`${this.documentApiUrl}/documents`);

@@ -35,6 +35,15 @@
                         width="100%" height="500px" style="border:none;">
                 </iframe>
   
+                <div *ngIf="doc.type === 'DOCUMENT' " class="p-mt-2">
+                    <button 
+                      pButton 
+                      type="button" 
+                      label="📊 Générer Évaluation Code"
+                      class="p-button-warning" 
+                      (click)="evaluateCahierCharge(doc)">
+                    </button>
+                  </div>
                 <!-- TXT -->
                 <pre *ngIf="doc.nomFichier.toLowerCase().endsWith('.txt')" 
                      style="background:#d3e8eb; border:1px solid #ddd; padding:10px; max-height:400px; overflow:auto;">
