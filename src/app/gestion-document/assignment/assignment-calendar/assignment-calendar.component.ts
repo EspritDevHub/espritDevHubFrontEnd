@@ -14,12 +14,22 @@ export class AssignmentCalendarComponent implements OnInit {
   showDialog: boolean = false;
   isExpired: boolean = false;
 
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, interactionPlugin],
-    initialView: 'dayGridMonth',
-    events: [],
-    eventClick: this.handleEventClick.bind(this),
-  };
+calendarOptions: CalendarOptions = {
+  plugins: [dayGridPlugin, interactionPlugin],
+  initialView: 'dayGridMonth',
+  events: [],
+  eventClick: this.handleEventClick.bind(this),
+  eventDidMount: (info) => {
+    const reminderToday = info.event.extendedProps['reminderToday'];
+
+    if (reminderToday) {
+      const bellIcon = document.createElement('span');
+      bellIcon.innerHTML = ' 🔔';
+      bellIcon.style.marginLeft = '5px';
+      info.el.querySelector('.fc-event-title')?.appendChild(bellIcon);
+    }
+  }
+};
 
   constructor(private assignmentService: AssignmentService) {}
 
@@ -28,9 +38,20 @@ export class AssignmentCalendarComponent implements OnInit {
       this.assignments = assignments;
       this.calendarOptions.events = this.buildCalendarEvents(assignments);
     });
-  }
 
+    this.assignmentService.getUpcoming().subscribe((reminders) => {
+      this.reminders = reminders.sort((a, b) => new Date(a.dateLimite).getTime() - new Date(b.dateLimite).getTime());
+    });
+    
+  }
+  reminders: any[] = [];
+  showReminderDialog: boolean = false;
+  toggleReminderList() {
+    this.showReminderDialog = !this.showReminderDialog;
+  }
+  
   buildCalendarEvents(assignments: any[]) {
+    
     const today = new Date();
     return assignments.map((assignment) => {
       const dueDate = new Date(assignment.dateLimite);
@@ -46,17 +67,21 @@ export class AssignmentCalendarComponent implements OnInit {
       } else {
         bgColor = '#4ade80'; // vert
       }
+      const isReminderDay = daysDiff === 1;
 
       return {
         title: assignment.titre,
         date: assignment.dateLimite,
         backgroundColor: bgColor,
-        extendedProps: { assignment },
+        extendedProps: { assignment ,  reminderToday: isReminderDay
+        },
       };
     });
   }
 
+  
   handleEventClick(info: any) {
+    
     const assignment = info.event.extendedProps.assignment;
     const deadline = new Date(assignment.dateLimite);
     const today = new Date();

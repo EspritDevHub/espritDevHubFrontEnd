@@ -19,6 +19,10 @@ export class AssignmentService {
     return this.http.get<Assignment[]>(`${this.apiUrl}`);
   }
 
+  getUpcoming(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:9096/api/assignments/upcoming');
+  }
+  
   create(assignment: Assignment): Observable<Assignment> {
 
       return this.http.post<Assignment>(`${this.apiUrl}`, assignment);

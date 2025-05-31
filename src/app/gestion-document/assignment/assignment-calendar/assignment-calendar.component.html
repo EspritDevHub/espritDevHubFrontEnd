@@ -1,5 +1,44 @@
+
+<!-- Dialog Rappels -->
+<p-dialog
+  header="📅 Rappels des devoirs dans  les 5 jours à venir...."
+  [(visible)]="showReminderDialog"
+  [modal]="true"
+  [style]="{ width: '750px', top: '10px' }"
+  [closable]="true"
+>
+  <!-- contenu -->
+  <ul *ngIf="reminders.length > 0" style="padding-left: 1.2rem;">
+    <li *ngFor="let a of reminders">
+      <strong>{{ a.titre }}</strong> — <i>{{ a.dateLimite | date: 'fullDate' }}</i>
+    </li>
+  </ul>
+  <div *ngIf="reminders.length === 0" class="p-text-center p-mt-3">
+    Aucun devoir dans les 5 jours à venir.
+  </div>
+</p-dialog>
+
+
+<!-- Bouton Cloche Rappels -->
+<div style="text-align: right; margin-bottom: 10px;">
+    <button
+      (click)="toggleReminderList()"
+      pButton
+      pRipple
+      class="p-button-rounded p-button-warning"
+      style="font-size: 1.3rem; min-width: 3.5rem;"
+      aria-label="Afficher les rappels"
+    >
+      🔔
+      <span *ngIf="reminders.length > 0" class="p-ml-2">({{ reminders.length }})</span>
+    </button>
+  </div>
+  
+
+<!-- Calendrier FullCalendar -->
 <full-calendar [options]="calendarOptions"></full-calendar>
 
+<!-- Dialog Détails du devoir -->
 <p-dialog
   header="📘 Détails du devoir"
   [(visible)]="showDialog"
@@ -24,8 +63,7 @@
 
     <div class="p-mb-3">
       <i class="pi pi-calendar-times text-warning mr-2"></i>
-      <strong>Deadline :</strong>
-      {{ selectedAssignment.dateLimite | date: 'fullDate' }}
+      <strong>Deadline :</strong> {{ selectedAssignment.dateLimite | date: 'fullDate' }}
     </div>
 
     <div class="p-mt-4 p-d-flex p-jc-center">
@@ -38,13 +76,11 @@
         (click)="submitAssignment()"
       ></button>
 
-      <div
-        *ngIf="isExpired"
-        class="p-text-center text-red-600 text-lg font-semibold"
-      >
+      <div *ngIf="isExpired" class="p-text-center text-red-600 text-lg font-semibold">
         😢 La date limite est dépassée.<br />
         Vous ne pouvez plus soumettre ce devoir.
       </div>
     </div>
   </ng-container>
 </p-dialog>
+
