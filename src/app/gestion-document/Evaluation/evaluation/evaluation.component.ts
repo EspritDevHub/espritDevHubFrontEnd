@@ -147,7 +147,21 @@ console.log("cc",doc.nomFichier)
       }
     });
   }
+ // Structure pour gérer l'ouverture des étudiants
+ openedEtudiants: Record<string, Record<string, boolean>> = {};
 
+ // ...
+
+ toggleEtudiant(seanceKey: string, etudiantKey: string): void {
+   if (!this.openedEtudiants[seanceKey]) {
+     this.openedEtudiants[seanceKey] = {};
+   }
+   this.openedEtudiants[seanceKey][etudiantKey] = !this.openedEtudiants[seanceKey][etudiantKey];
+ }
+
+ isOpened(seanceKey: string, etudiantKey: string): boolean {
+   return this.openedEtudiants[seanceKey]?.[etudiantKey] || false;
+ }
   evaluateCahierCharge(doc: any) {
     
     this.evaluationService.evaluatePdf("http://localhost:9096/test.pdf").subscribe((result) => {

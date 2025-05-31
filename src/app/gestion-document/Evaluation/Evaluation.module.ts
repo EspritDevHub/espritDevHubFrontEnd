@@ -23,6 +23,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TagModule } from 'primeng/tag';
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { EvaluationRoutingModule } from './Evaluationrouting.module';
+import { Card, CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [EvaluationComponent
@@ -44,6 +45,7 @@ import { EvaluationRoutingModule } from './Evaluationrouting.module';
         RadioButtonModule,
         InputNumberModule,
         DialogModule,
+        CardModule,
         EvaluationRoutingModule,DialogModule,
           TagModule,CalendarModule,
   ]

@@ -1,132 +1,163 @@
 <div *ngFor="let seance of (documentsGrouped | keyvalue)" class="p-mb-5">
-    <!-- Titre séance -->
-    <h2 class="p-text-primary p-mb-4">📘 Séance : {{ seance.key }}</h2>
+    <p-card class="p-mb-4">
+      <ng-template pTemplate="header">
+        <h2 style="color:#00bcd4;">📘 Rendu : {{ seance.key }}</h2>
+      </ng-template>
   
-    <div *ngFor="let etudiant of (seance.value | keyvalue)" class="p-mb-4 p-p-3 p-shadow-1" style="border-radius:8px; background:#0c0a662d;">
-      <!-- Titre étudiant -->
-      <h3 class="p-text-secondary p-mb-3">👤 Étudiant : {{ etudiant.key }}</h3>
+      <ng-template pTemplate="content">
+        <div *ngFor="let etudiant of (seance.value | keyvalue)"
+             class="p-mb-4 p-p-3 p-shadow-2"
+             style="border-radius:8px; background:#2e3b55; color:#ffffff;">
   
-      <div *ngFor="let doc of etudiant.value" class="p-card p-mb-4 p-shadow-2" style="border-radius:6px;">
-        <div class="p-card-body">
-     
-          <div class="p-mb-3">
-            <ng-container [ngSwitch]="doc.type">
+          <h3 style="cursor:pointer;" (click)="toggleEtudiant(seance.key, etudiant.key)">
+            👤 Étudiant : {{ etudiant.key }}
+            <span *ngIf="isOpened(seance.key, etudiant.key)">▲</span>
+            <span *ngIf="!isOpened(seance.key, etudiant.key)">▼</span>
+          </h3>
   
-              <!-- LIEN : lien cliquable -->
-              <a *ngSwitchCase="'LIEN'" [href]="doc.nomFichier" target="_blank" class="p-button p-button-text p-mb-2">
-                🔗 {{ doc.nomFichier }}
-              </a>
+          <div *ngIf="isOpened(seance.key, etudiant.key)">
+            <div *ngFor="let doc of etudiant.value"
+                 class="p-card p-mb-4 p-shadow-2"
+                 style="border-radius:6px; background:#3c4a68; color:#ffffff;">
   
-              <div *ngIf="doc.type === 'LIEN' " class="p-mt-2">
-                <button 
-                  pButton 
-                  type="button" 
-                  label="📊 Générer Évaluation Code"
-                  class="p-button-warning" 
-                  (click)="evaluateGitLink(doc)">
-                </button>
-              </div>
-              
-              <!-- DOCUMENT : PDF ou TXT -->
-              <ng-container *ngSwitchCase="'DOCUMENT'">
-                <!-- PDF -->
-                <iframe *ngIf="doc.nomFichier.toLowerCase().endsWith('.pdf')" 
-                        [src]="sanitizeUrl(doc.nomFichier)" 
-                        width="100%" height="500px" style="border:none;">
-                </iframe>
+              <div class="p-card-body">
+                <!-- Affichage document -->
+                <div class="p-mb-3">
+                  <ng-container [ngSwitch]="doc.type">
   
-                <div *ngIf="doc.type === 'DOCUMENT' " class="p-mt-2">
-                    <button 
-                      pButton 
-                      type="button" 
-                      label="📊 Générer Évaluation Code"
-                      class="p-button-warning" 
-                      (click)="evaluateCahierCharge(doc)">
+                    <!-- Lien -->
+                    <ng-container *ngSwitchCase="'LIEN'">
+                      <a [href]="doc.nomFichier"
+                         target="_blank"
+                         class="p-button p-button-text p-mb-2"
+                         style="color:#00bcd4;">
+                        🔗 {{ doc.nomFichier }}
+                      </a>
+  
+                      <div class="p-mt-2">
+                        <button pButton
+                                type="button"
+                                label="📊 Générer Évaluation Code"
+                                class="p-button-warning"
+                                (click)="evaluateGitLink(doc)">
+                        </button>
+                      </div>
+                    </ng-container>
+  
+                    <!-- Document PDF -->
+                    <ng-container *ngSwitchCase="'DOCUMENT'">
+                      <iframe *ngIf="doc.nomFichier.toLowerCase().endsWith('.pdf')"
+                              [src]="sanitizeUrl(doc.nomFichier)"
+                              width="100%"
+                              height="500px"
+                              style="border:none; background:#fff;">
+                            
+                      </iframe>
+                      <div class="p-mt-4  p-mb-4 p-d-flex p-flex-wrap p-ai-center p-gap-3">
+                        <!-- Bouton Télécharger -->
+                        <a [href]="doc.nomFichier"
+                           target="_blank"
+                           class="p-button p-button-outlined p-button-warning p-d-flex p-ai-center">
+                          <i class="pi pi-download p-mr-2"></i>
+                          Télécharger
+                        </a>
+                      
+                  
+
+                            <button
+                              pButton
+                              type="button"
+                              label="📊 Générer Évaluation des Besoins"
+                              class="p-button-warning p-mr-2"
+                              (click)="evaluateCahierCharge(doc)">
+                            </button>
+      
+                        
+                          </div>
+                      
+                    </ng-container>
+  
+                    <!-- Texte brut -->
+                    <ng-container *ngSwitchCase="'TEXTE'">
+                      <pre style="background:#1f2d4a; color:#e1e1e1; border:1px solid #ddd; padding:10px; white-space: pre-wrap;">
+                        {{ doc.contenu }}
+                      </pre>
+  
+                      <div class="p-mt-2">
+                        <button
+                          pButton
+                          type="button"
+                          label="📊 Générer Évaluation des Besoins"
+                          class="p-button-warning p-mr-2"
+                          (click)="SuggestEvaluationText(doc)">
+                        </button>
+  
+                    
+                      </div>
+                    </ng-container>
+  
+                    <!-- Fichiers non pris en charge -->
+                    <ng-container *ngSwitchDefault>
+                      <p>Format non supporté pour la visualisation.</p>
+                      <a [href]="doc.nomFichier"
+                         target="_blank"
+                         class="p-button p-button-secondary">
+                        📥 Télécharger
+                      </a>
+                    </ng-container>
+                  </ng-container>
+                </div>
+  
+                <!-- Formulaire d’évaluation -->
+                <div class="p-grid p-formgrid p-fluid p-align-center"
+                     style="background-color: #1a2639; padding: 1.5rem; border-radius: 12px;">
+                  <div class="p-field p-col-12 p-md-3">
+                    <label style="color: #ffffff;">Note</label>
+                    <input type="number"
+                           pInputText
+                           [(ngModel)]="doc.note"
+                           min="0"
+                           max="20"
+                           [readonly]="doc.type === 'TEXTE' && doc.note != null"
+                           style="background-color: #ffffff; color: #000000;" />
+                  </div>
+  
+                  <div class="p-field p-col-12 p-md-6" style="border-top: 2px solid #00bcd4; padding-top: 1rem;">
+                    <label style="color: #ffffff;">Commentaire:</label>
+                    <input type="text"
+                           pInputText
+                           [(ngModel)]="doc.commentaire"
+                           [readonly]="doc.type === 'TEXTE' && doc.commentaire"
+                           placeholder="Ce qui manque / Ce qui est fait ..."
+                           style="background-color: #ffffff; color: #000000;" />
+                  </div>
+  
+                  <div class="p-field p-col-12 p-md-6" style="border-top: 2px solid #000000; padding-top: 1rem;">
+                    <label style="color: #ffffff;">Suggestion:</label>
+                    <input type="text"
+                           pInputText
+                           [(ngModel)]="doc.suggestion"
+                           [readonly]="doc.type === 'TEXTE' && doc.suggestion"
+                           placeholder="Suggestions d’amélioration"
+                           style="background-color: #ffffff; color: #000000;" />
+                  </div>
+  
+                  <div class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
+                    <button
+                      pButton
+                      type="button"
+                      label="✅ Evaluer Étudiant"
+                      class="p-button-success"
+                      (click)="goToSeancesList()">
                     </button>
                   </div>
-                <!-- TXT -->
-                <pre *ngIf="doc.nomFichier.toLowerCase().endsWith('.txt')" 
-                     style="background:#d3e8eb; border:1px solid #ddd; padding:10px; max-height:400px; overflow:auto;">
-                  {{ doc.contenu }}
-                </pre>
-  
-                <!-- Autre type document -->
-                <div *ngIf="!doc.nomFichier.toLowerCase().endsWith('.pdf') && !doc.nomFichier.toLowerCase().endsWith('.txt')">
-                  <p>Format non supporté pour la visualisation.</p>
-                  <a [href]="doc.nomFichier" target="_blank" class="p-button p-button-text p-mb-2">Télécharger</a>
                 </div>
-              </ng-container>
-  
-              <!-- TEXTE : contenu simple -->
-              <pre *ngSwitchCase="'TEXTE'" 
-                   style="background:#3442bb; color:white; border:1px solid #ddd; padding:10px; white-space: pre-wrap;">
-                {{ doc.contenu }}
-              </pre>
-  
-              <!-- Par défaut : lien téléchargement -->
-              <div *ngSwitchDefault>
-                <a [href]="doc.nomFichier" target="_blank" class="p-button p-button-text p-mb-2">Télécharger</a>
               </div>
-  
-            </ng-container>
+            </div>
           </div>
   
-          <!-- Évaluation -->
-      <!-- Évaluation -->
-
-
-<div class="p-grid p-formgrid p-fluid p-align-center">
-    <div class="p-field p-col-12 p-md-3">
-      <label>Note</label>
-      <input type="number"
-             pInputText
-             [(ngModel)]="doc.note"
-             min="0"
-             max="20"
-             [readonly]="doc.type === 'TEXTE' && doc.note != null"
-             style="background-color: #110202;" />
-    </div>
-  
-    <div class="p-field p-col-12 p-md-6">
-      <label>Commentaire:</label>
-      <input type="text"
-             pInputText
-             [(ngModel)]="doc.commentaire"
-             [readonly]="doc.type === 'TEXTE' && doc.commentaire"
-             placeholder="Ce qui Manque / Ce qui est fait ..."
-             style="background-color: #110202;" />
-    </div>
-    <div class="p-field p-col-12 p-md-6">
-        <label>Suggestion:</label>
-        <input type="text"
-               pInputText
-               [(ngModel)]="doc.suggestion"
-               [readonly]="doc.type === 'TEXTE' && doc.suggestion"
-               placeholder="Ce qui Manque / Ce qui est fait ..."
-               style="background-color: #110202;" />
-      </div>
-      <div *ngIf="doc.type === 'TEXTE'" class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
-        <button 
-          pButton
-          type="button"
-          label="📊 Générer Évaluation"
-          class="p-button-info"
-          (click)="SuggestEvaluationText(doc)">
-        </button>
-      </div>
-      
-      
-      <div class="p-field p-col-12 p-md-3 p-d-flex p-jc-end p-ai-end">
-        <button 
-        pButton 
-        type="button" 
-        label="Evaluer Finalement Etudiant selon ses rendu " 
-        class="p-button-success p-mb-5" 
-        (click)="goToSeancesList()">
-        
-      </button>
-      
-      </div>
-    </div>
+        </div>
+      </ng-template>
+    </p-card>
   </div>
   
