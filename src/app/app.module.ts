@@ -37,7 +37,6 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
 @NgModule({
     declarations: [
         AppComponent,
-        EvaluationComponent,
         seanceComponent,
         EmploiComponent,
     ],
