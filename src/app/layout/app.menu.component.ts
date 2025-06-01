@@ -71,7 +71,6 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Inbox',
                                 icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/apps/mail/inbox']
-                                routerLink: ['/apps/notes/list']
                             },
                                {
                                 label: 'Classement-List',
