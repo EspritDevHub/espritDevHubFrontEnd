@@ -3,6 +3,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataViewModule } from 'primeng/dataview';
@@ -34,6 +35,7 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
     imports: [
         AppRoutingModule,
         AppLayoutModule,
+        BrowserAnimationsModule,
         BrowserModule,
         HttpClientModule,
         CommonModule,
@@ -50,8 +52,6 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
         TableModule,
         CardModule,
          
-        
-        
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
