@@ -19,6 +19,14 @@ import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 
+import { SeanceComponent } from './gestion-notes/seance/seance_note/seance.component';
+import { SeanceModule } from './gestion-notes/seance/seance.module';
+import { EvaluationComponent } from './gestion-document/Evaluation/evaluation/evaluation.component';
+import { AssignmentCalendarComponent } from './gestion-document/assignment/assignment-calendar/assignment-calendar.component';
+import { CalendarAppModule } from './demo/components/apps/calendar/calendar.app.module';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ClassementComponent } from './gestion-notes/note/classement/classement.component';
+ 
 
 @NgModule({
     declarations: [
@@ -43,6 +51,9 @@ import { CardModule } from 'primeng/card';
         DialogModule,
         TableModule,
         CardModule,
+         
+        
+        
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }

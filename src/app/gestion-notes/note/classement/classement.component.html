@@ -1,0 +1,75 @@
+<div class="dashboard-container" style="font-family: 'Segoe UI', sans-serif; background: #202131 ; padding: 2rem; min-height: 100vh;">
+
+  <!-- 🎯 Filtrer par séance -->
+  <div style="background: white; border-radius: 1rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05); animation: fadeIn 0.8s ease-in;">
+    <h2 style="font-size: 1.8rem; color: #6366f1; display: flex; align-items: center; gap: 0.5rem;">
+      🎯 Filtrer par séance
+    </h2>
+<select [(ngModel)]="filteredSeanceId" (change)="onFilterChange()"
+  style="
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border-radius: 0.75rem;
+    border: none;
+    background: linear-gradient(to right, #eef2ff, #e0e7ff);
+    font-size: 1rem;
+    color: #1f2937;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 2px 8px rgba(99,102,241,0.15);
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill=\'%236366f1\' height=\'20\' viewBox=\'0 0 24 24\' width=\'20\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+  "
+  onfocus="this.style.outline='none'; this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.4)'"
+  onblur="this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1), 0 2px 8px rgba(99,102,241,0.15)'">
+  <option value="all" style="background: white;">Toutes les séances</option>
+  <option *ngFor="let s of reussiteStats" [value]="s.seanceId" style="background: white;">
+    {{ s.seanceTitre }}
+  </option>
+</select>
+
+  </div>
+
+  <!-- 🏆 Meilleurs étudiants -->
+  <div style="margin-bottom: 2rem;">
+    <h2 style="font-size: 1.8rem; color: #10b981; margin-bottom: 1rem;">🏆 Meilleur étudiant par séance</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <div *ngFor="let s of filteredClassement"
+        style="background: white; border-left: 6px solid #10b981; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transform: scale(1); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.08)'"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.05)'">
+        <h3 style="font-size: 1.2rem; color: #374151; margin-bottom: 0.5rem;">{{ s.seanceTitre }}</h3>
+        <p style="color: #4b5563; line-height: 1.5;">
+          👤 <strong>{{ s.topEtudiants[0]?.etudiantId }}</strong><br>
+          🎯 Note: <strong>{{ s.topEtudiants[0]?.valeur }}/20</strong><br>
+          🏅 <span style="color: #6366f1;">{{ s.topEtudiants[0]?.badge }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📊 Chart -->
+  <div style="background: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05); animation: fadeIn 1s ease-in;">
+    <h2 style="font-size: 1.8rem; color: #3b82f6; margin-bottom: 1rem;">📊 Pourcentage de réussite par séance</h2>
+    <div style="width: 100%; overflow-x: auto;">
+      <canvas baseChart
+        [data]="chartData"
+        [type]="'bar'"
+        [options]="chartOptions"
+        style="width: 100%; height: 400px;">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Animation inline -->
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+</div>
