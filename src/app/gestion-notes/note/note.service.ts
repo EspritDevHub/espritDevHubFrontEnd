@@ -40,4 +40,14 @@ export class NoteService {
 getRecommandations(matiere: string, note: number): Observable<any[]> {
   return this.http.get<any[]>(`${this.baseUrl}/recommendations?matiere=${encodeURIComponent(matiere)}&note=${note}`);
 }
+
+
+  getClassement(): Observable<any> {
+    return this.http.get('http://localhost:9091/api/classement/top-etudiants');
+  }
+
+  getReussite(): Observable<any> {
+    return this.http.get('http://localhost:9091/api/classement/reussite');
+  }
 }
+

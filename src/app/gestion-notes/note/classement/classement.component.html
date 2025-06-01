@@ -1,0 +1,9 @@
+<h2>🏆 Meilleur étudiant par séance</h2>
+<div *ngFor="let s of classement">
+  <p><strong>{{ s.seanceTitre }}</strong>: {{ s.topEtudiants[0]?.etudiantId }} ({{ s.topEtudiants[0]?.valeur }}/20)</p>
+</div>
+
+<h2>📊 Pourcentage de réussite par séance</h2>
+<div *ngFor="let r of reussiteStats">
+  <p>{{ r.seanceTitre }}: {{ r.pourcentageReussite.toFixed(2) }}% {{ r.badge }}</p>
+</div>

@@ -19,10 +19,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { NoteRoutingModule } from '../note-routing.module';
 import { NoteComponent } from './note.component';
+import { ClassementComponent } from '../classement/classement.component';
 
 @NgModule({
   declarations: [
-    NoteComponent
+    NoteComponent,ClassementComponent
   ],
   imports: [
      CommonModule,

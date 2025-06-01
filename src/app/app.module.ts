@@ -9,6 +9,7 @@ import { EvaluationComponent } from './gestion-document/Evaluation/evaluation/ev
 import { AssignmentCalendarComponent } from './gestion-document/assignment/assignment-calendar/assignment-calendar.component';
 import { CalendarAppModule } from './demo/components/apps/calendar/calendar.app.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ClassementComponent } from './gestion-notes/note/classement/classement.component';
  
 
 @NgModule({
