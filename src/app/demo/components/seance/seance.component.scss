@@ -1,0 +1,34 @@
+// Style pour le bouton d'ajout
+.add-button {
+    margin-left: auto;
+}
+
+// Adaptation du formulaire
+.p-fluid .field {
+    margin-bottom: 1.5rem;
+}
+
+// Responsive
+@media screen and (max-width: 960px) {
+    .p-dialog {
+        width: 90vw !important;
+    }
+
+    
+    
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  height: calc(100% - 3rem); /* adapter selon le header */
+  overflow: hidden;
+}
+
+::ng-deep full-calendar {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+::ng-deep .p-dialog {
+  z-index: 1100 !important; /* s'assurer qu'il est au-dessus des autres */
+}

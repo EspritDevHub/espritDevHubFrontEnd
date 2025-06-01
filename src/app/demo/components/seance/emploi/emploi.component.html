@@ -1,0 +1,43 @@
+<div class="card">
+  <button class="btn btn-primary my-3" (click)="exportPDF()" [disabled]="loading">
+    <i class="pi pi-file-pdf mr-2"></i>
+    {{ loading ? 'Chargement...' : 'Exporter en PDF' }}
+  </button>
+
+  <div #planningToExport class="planning-container">
+    <h2 class="text-center mb-4">Emploi du Temps de la Semaine</h2>
+    
+    <div *ngIf="loading" class="text-center p-5">
+      <i class="pi pi-spinner pi-spin" style="font-size: 2rem"></i>
+      <p>Chargement des séances...</p>
+    </div>
+
+    <table *ngIf="!loading" class="table table-bordered text-center">
+      <thead class="table-header">
+        <tr>
+          <th *ngFor="let day of days" class="day-header">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let day of days" class="day-cell">
+            <div *ngFor="let seance of getSeancesForDay(day)" class="seance-card">
+              <div class="seance-title">{{ seance.titre }}</div>
+              <div class="seance-time">
+                {{ formatTime(seance.heureDebut) }} – {{ formatTime(seance.heureFin) }}
+              </div>
+              <div class="seance-details">
+                <div *ngIf="seance.salle"><strong>Salle:</strong> {{ seance.salle }}</div>
+                <div *ngIf="seance.description">{{ seance.description }}</div>
+              </div>
+            </div>
+            
+            <div *ngIf="getSeancesForDay(day).length === 0" class="empty-slot">
+              Aucune séance prévue
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

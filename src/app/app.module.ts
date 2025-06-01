@@ -18,6 +18,12 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
+import { seanceComponent } from './demo/components/seance/seance.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { EmploiComponent } from './demo/components/seance/emploi/emploi.component';
 
 import { SeanceComponent } from './gestion-notes/seance/seance_note/seance.component';
 import { SeanceModule } from './gestion-notes/seance/seance.module';
@@ -31,8 +37,12 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
 @NgModule({
     declarations: [
         AppComponent,
+        EvaluationComponent,
+        seanceComponent,
+        EmploiComponent,
     ],
     imports: [
+        ToastModule,
         AppRoutingModule,
         AppLayoutModule,
         BrowserAnimationsModule,
@@ -51,10 +61,12 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
         DialogModule,
         TableModule,
         CardModule,
-         
+        InputNumberModule,
+        FullCalendarModule,
+    CalendarModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },MessageService
     ],
     bootstrap: [AppComponent]
 })

@@ -116,4 +116,5 @@ export class EvaluationComponent {
     const entry = this.criteres.find(c => c.value === numericValue);
     return entry ? entry.label : 'Inconnu';
   }
+  
 }
