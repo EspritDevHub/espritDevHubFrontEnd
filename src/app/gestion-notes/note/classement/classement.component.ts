@@ -30,6 +30,12 @@ chartData: ChartData<'bar'> = {
   ngOnInit() {
     this.getClassement();
     this.getReussite();
+
+     // Refresh every 30 seconds
+  setInterval(() => {
+    this.getClassement();
+    this.getReussite();
+  }, 30000); 
   }
 
   getClassement() {
