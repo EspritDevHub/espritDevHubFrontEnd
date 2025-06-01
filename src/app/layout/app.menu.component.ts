@@ -34,6 +34,11 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Etudiants-List',
                                 icon: 'pi pi-fw pi-pencil',
                                 routerLink: ['/apps/notes/list']
+                            },
+                               {
+                                label: 'Classement-List',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/notes/classement']
                             }
                         ]
                     },
