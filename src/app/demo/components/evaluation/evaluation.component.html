@@ -19,6 +19,7 @@
         <div class="flex justify-content-between px-3">
           <p-button icon="pi pi-comments" (onClick)="showDialog(product.id)"></p-button>
           <p-button icon="pi pi-plus" class="p-button-success" (onClick)="openAddDialog(product.id)"></p-button>
+          
         </div>
       </div>
     </div>
@@ -26,7 +27,7 @@
 </p-dataView>
 
 
-<p-dialog header="Liste des évaluations" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw'}">
+<p-dialog header="Liste des évaluations" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw',height:'700px'}">
   <ng-template pTemplate="content">
     <div *ngIf="evaluations.length > 0; else noData">
       <div *ngFor="let eval of evaluations" class="mb-3">

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { EvaluationComponent } from './demo/components/evaluation/evaluation.component';
+import { seanceComponent } from './demo/components/seance/seance.component';
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
 };
@@ -12,6 +13,7 @@ const routes: Routes = [
         path: '', component: AppLayoutComponent,
         children: [
             { path: 'evaluation', component: EvaluationComponent },
+            { path: 'seance', component: seanceComponent },
             { path: '', loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
             { path: 'uikit', data: { breadcrumb: 'UI Kit' }, loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
             { path: 'utilities', data: { breadcrumb: 'Utilities' }, loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },

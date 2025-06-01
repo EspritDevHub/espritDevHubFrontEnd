@@ -8,7 +8,7 @@ import { Evaluation } from '../module/feedback';
 })
 export class FeedbackService {
 
-  private baseUrl = 'http://localhost:9091/api/evaluations'; // à adapter à ton backend
+  private baseUrl = 'http://localhost:9091/api/evaluations'; 
 
   constructor(private http: HttpClient) {}
 

@@ -44,4 +44,9 @@ export class ProductService {
             .then(res => res.data as Product[])
             .then(data => data);
     }
+    updateLikes(productId: string, likes: number) {
+  return this.http.put(`/api/products/${productId}/likes`, { likes });
+}
+
+    
 }

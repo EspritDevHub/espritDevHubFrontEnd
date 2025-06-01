@@ -55,8 +55,13 @@ export class AppMenuComponent implements OnInit {
 
                     {
                         label: 'Feedback',
-                        icon: 'pi pi-fw pi-calendar',
+                        icon: 'pi pi-fw pi-comment',
                         routerLink: ['/evaluation']
+                    },
+                                        {
+                        label: 'Seances',
+                        icon: 'pi pi-fw pi-calendar',
+                        routerLink: ['/seance']
                     },
                     {
                         label: 'Chat',
