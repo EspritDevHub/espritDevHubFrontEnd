@@ -14,7 +14,7 @@ data :any ;chartType:any ;
   chartLabels: string[] = [];
 
 chartData: ChartData<'bar'> = {
-  labels: [],
+  labels: ["Réussite"],
   datasets: []
 };
   chartOptions = {
