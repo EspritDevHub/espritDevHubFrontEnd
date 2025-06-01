@@ -1,9 +1,32 @@
-<h2>🏆 Meilleur étudiant par séance</h2>
-<div *ngFor="let s of classement">
-  <p><strong>{{ s.seanceTitre }}</strong>: {{ s.topEtudiants[0]?.etudiantId }} ({{ s.topEtudiants[0]?.valeur }}/20)</p>
-</div>
+<div class="dashboard-container">
+  <h2>🎯 Filtrer par séance</h2>
+  <select [(ngModel)]="filteredSeanceId" (change)="onFilterChange()">
+    <option value="all">Toutes les séances</option>
+    <option *ngFor="let s of reussiteStats" [value]="s.seanceId">
+      {{ s.seanceTitre }}
+    </option>
+  </select>
 
-<h2>📊 Pourcentage de réussite par séance</h2>
-<div *ngFor="let r of reussiteStats">
-  <p>{{ r.seanceTitre }}: {{ r.pourcentageReussite.toFixed(2) }}% {{ r.badge }}</p>
+  <h2>🏆 Meilleur étudiant par séance</h2>
+  <div class="card" *ngFor="let s of filteredClassement">
+    <h3>{{ s.seanceTitre }}</h3>
+    <p>
+      👤 <strong>{{ s.topEtudiants[0]?.etudiantId }}</strong><br>
+      🎯 Note: {{ s.topEtudiants[0]?.valeur }}/20<br>
+      {{ s.topEtudiants[0]?.badge }}
+    </p>
+  </div>
+
+  <h2>📊 Pourcentage de réussite par séance</h2>
+  <div style="display: block; width: 80vw;">
+    <canvas baseChart
+      [data]="chartData"
+
+      [labels]="chartLabels"
+      [type]="'bar'"
+      [options]="chartOptions">
+    </canvas>
+  </div>
+
+
 </div>

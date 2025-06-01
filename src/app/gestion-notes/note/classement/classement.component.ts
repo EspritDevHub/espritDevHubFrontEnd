@@ -1,25 +1,75 @@
-import { Component } from '@angular/core';
-import { NoteService } from '../note.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-classement',
   templateUrl: './classement.component.html',
-  styleUrls: ['./classement.component.scss']
 })
-export class ClassementComponent {
- constructor(
-    private noteService: NoteService,
-  ) {}
-
+export class ClassementComponent implements OnInit {
   classement: any[] = [];
-reussiteStats: any[] = [];
-ngOnInit() {
-  this.noteService.getClassement().subscribe(data => {
-    this.classement = data.classement;
-  });
+  reussiteStats: any[] = [];
+  filteredSeanceId: string = 'all';
+data :any ;chartType:any ; 
+  chartLabels: string[] = [];
 
-  this.noteService.getReussite().subscribe(data => {
-    this.reussiteStats = data;
-  });
+chartData: ChartData<'bar'> = {
+  labels: [],
+  datasets: []
+};
+  chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: true }
+    }
+  };
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getClassement();
+    this.getReussite();
+  }
+
+  getClassement() {
+    this.http.get<any>('http://localhost:9091/api/classement/top-etudiants')
+      .subscribe(res => this.classement = res.classement);
+  }
+
+  getReussite() {
+    this.http.get<any[]>('http://localhost:9091/api/classement/reussite')
+      .subscribe(res => {
+        this.reussiteStats = res;
+        this.updateChart();
+      });
+  }
+updateChart() {
+  const filtered = this.filteredSeanceId === 'all'
+    ? this.reussiteStats
+    : this.reussiteStats.filter(r => r.seanceId === this.filteredSeanceId);
+
+  this.chartLabels = filtered.map(r => r.seanceTitre);
+
+  this.chartData = {
+    labels: this.chartLabels,
+    datasets: [
+      {
+        data: filtered.map(r => r.pourcentageReussite),
+        label: 'Réussite (%)'
+      }
+    ]
+  };
 }
+
+
+  onFilterChange() {
+    this.updateChart();
+  }
+
+  get filteredClassement() {
+    return this.filteredSeanceId === 'all'
+      ? this.classement
+      : this.classement.filter(c => c.seanceId === this.filteredSeanceId);
+  }
 }
