@@ -18,7 +18,7 @@ export class SeanceComponent implements OnInit {
   deleteSeanceDialog = false;
   isEdit = false;
  message:any =[];
-  user: any;  // Pour stocker les informations de l'utilisateur
+  user: any;  
   userRole: string = '';
   userId: string = '123';
 

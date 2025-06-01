@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SeanceComponent } from './seance/seance.component';
+import { SeanceComponent } from './seance_note/seance.component';
 
 
 const routes: Routes = [

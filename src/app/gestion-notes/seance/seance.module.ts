@@ -18,7 +18,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { SeanceRoutingModule } from './seance-routing.module';
-import { SeanceComponent } from './seance/seance.component';
+import { SeanceComponent } from './seance_note/seance.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageModule } from 'primeng/message';
