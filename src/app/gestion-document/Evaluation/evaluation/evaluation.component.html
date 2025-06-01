@@ -1,7 +1,8 @@
 <div *ngFor="let seance of (documentsGrouped | keyvalue)" class="p-mb-5">
     <p-card class="p-mb-4">
       <ng-template pTemplate="header">
-        <h2 style="color:#00bcd4;">📘 Rendu : {{ seance.key }}</h2>
+        <h3 style="color:#cee3e6;">📘 Détails du Rendu : <h4 style="color:#9cb4b8;"> {{ seance.key }}</h4></h3>
+
       </ng-template>
   
       <ng-template pTemplate="content">
