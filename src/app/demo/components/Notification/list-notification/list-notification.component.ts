@@ -68,9 +68,18 @@ export class ListNotificationComponent {
       }
 
       formatDate(isoString: string): string {
-        const date = new Date(isoString);
-        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+       
+        if (!isoString) return 'now';
+      
+        // Normalize the string to be compatible with Date constructor
+        const normalized = isoString.replace(/\+00:00$/, 'Z');
+      
+        const date = new Date(normalized);
+        if (isNaN(date.getTime())) return 'now';
+      
+        return date.toLocaleDateString('en-GB') + ' ' + date.toLocaleTimeString('en-GB');
       }
+ 
 
       markAsRead(notif : any)
       {

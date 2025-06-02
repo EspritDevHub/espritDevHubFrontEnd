@@ -27,7 +27,7 @@ import { EmploiComponent } from './demo/components/seance/emploi/emploi.componen
 
 import { SeanceComponent } from './gestion-notes/seance/seance_note/seance.component';
 import { SeanceModule } from './gestion-notes/seance/seance.module';
-import { EvaluationComponent } from './gestion-document/Evaluation/evaluation/evaluation.component';
+import { EvaluationComponents } from './demo/components/evaluation/evaluation.component';
 import { AssignmentCalendarComponent } from './gestion-document/assignment/assignment-calendar/assignment-calendar.component';
 import { CalendarAppModule } from './demo/components/apps/calendar/calendar.app.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -43,7 +43,7 @@ import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
     declarations: [
         AppComponent,
-
+        EvaluationComponents,
         seanceComponent,
         EmploiComponent,
 
