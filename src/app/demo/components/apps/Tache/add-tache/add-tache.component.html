@@ -1,0 +1,135 @@
+<div class="card">
+    <span class="block text-900 font-bold text-xl mb-4">Ajouter une Tâche</span>
+    <form (ngSubmit)="addTache()" #tacheForm="ngForm" class="grid">
+        <div class="col-12 lg:col-8">
+            <div class="flex flex-column p-fluid">
+                <!-- Titre -->
+                <div class="mb-4">
+                    <label for="titre" class="block text-900 font-semibold mb-2">Titre</label>
+                    <input pInputText type="text" id="titre" name="titre" [(ngModel)]="tache.titre" #titre="ngModel" required />
+                    <small class="text-red-500" *ngIf="titre.invalid && titre.touched">Le titre est requis.</small>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                    <label for="description" class="block text-900 font-semibold mb-2">Description</label>
+                    <textarea
+                        pInputTextarea
+                        id="description"
+                        name="description"
+                        [(ngModel)]="tache.description"
+                        #description="ngModel"
+                        rows="4"
+                        required
+                    ></textarea>
+                    <small class="text-red-500" *ngIf="description.invalid && description.touched">La description est requise.</small>
+                </div>
+
+                <!-- Assignée à -->
+                <div class="mb-4">
+                    <label for="assigneA" class="block text-900 font-semibold mb-2">Assignée à</label>
+                    <input
+                        pInputText
+                        type="text"
+                        id="assigneA"
+                        name="assigneA"
+                        [(ngModel)]="tache.assigneA"
+                        #assigneA="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="assigneA.invalid && assigneA.touched">Ce champ est requis.</small>
+                </div>
+
+                <!-- Date Début -->
+                <div class="mb-4">
+                    <label for="dateDebut" class="block text-900 font-semibold mb-2">Date Début</label>
+                    <input
+                        pInputText
+                        type="datetime-local"
+                        id="dateDebut"
+                        name="dateDebut"
+                        [(ngModel)]="tache.dateDebut"
+                        #dateDebut="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="dateDebut.invalid && dateDebut.touched">Date de début requise.</small>
+                </div>
+
+                <!-- Date Fin -->
+                <div class="mb-4">
+                    <label for="dateFin" class="block text-900 font-semibold mb-2">Date Fin</label>
+                    <input
+                        pInputText
+                        type="datetime-local"
+                        id="dateFin"
+                        name="dateFin"
+                        [(ngModel)]="tache.dateFin"
+                        #dateFin="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="dateFin.invalid && dateFin.touched">Date de fin requise.</small>
+                </div>
+
+                <!-- Statut -->
+                <div class="mb-4">
+                    <label for="etat" class="block text-900 font-semibold mb-2">Statut</label>
+                    <select id="etat" name="etat" [(ngModel)]="tache.etat" class="p-inputtext p-component">
+                        <option *ngFor="let s of statutOptions" [value]="s">{{ statutLabels[s] }}</option>
+                    </select>
+                </div>
+
+                <!-- Avancement -->
+                <div class="mb-4">
+                    <label for="avancement" class="block text-900 font-semibold mb-2">Avancement (%)</label>
+                    <input
+                        pInputText
+                        type="number"
+                        id="avancement"
+                        name="avancement"
+                        [(ngModel)]="tache.avancement"
+                        min="0"
+                        max="100"
+                    />
+                </div>
+
+                <!-- Durée -->
+                <div class="mb-4">
+                    <label for="duree" class="block text-900 font-semibold mb-2">Durée</label>
+                    <input pInputText type="number" id="duree" name="duree" [(ngModel)]="tache.duree" min="0" />
+                </div>
+
+                <!-- Type de Durée -->
+                <div class="mb-4">
+                    <label for="typeDuree" class="block text-900 font-semibold mb-2">Type de Durée</label>
+                    <select id="typeDuree" name="typeDuree" [(ngModel)]="tache.typeDuree" class="p-inputtext p-component">
+                        <option *ngFor="let type of typeDureeOptions" [value]="type">{{ typeDureeLabels[type] }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="col-12 lg:col-4">
+            <div class="flex justify-content-between gap-3">
+                <button
+                    pButton
+                    pRipple
+                    type="button"
+                    class="p-button-danger flex-1 p-button-outlined"
+                    label="Annuler"
+                    icon="pi pi-times"
+                    (click)="resetForm(tacheForm)"
+                ></button>
+                <button
+                    pButton
+                    pRipple
+                    type="submit"
+                    class="p-button-primary flex-1"
+                    label="Ajouter"
+                    icon="pi pi-check"
+                    [disabled]="tacheForm.invalid"
+                ></button>
+            </div>
+        </div>
+    </form>
+</div>

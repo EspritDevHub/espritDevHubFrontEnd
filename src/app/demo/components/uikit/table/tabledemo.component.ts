@@ -1,129 +1,73 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Customer, Representative } from 'src/app/demo/api/customer';
-import { CustomerService } from 'src/app/demo/service/customer.service';
-import { Product } from 'src/app/demo/api/product';
-import { ProductService } from 'src/app/demo/service/product.service';
+import { Projet } from 'src/app/demo/api/projet';
+import { Tache } from 'src/app/demo/api/tache';
+import { ProjetService } from 'src/app/demo/service/projet.sevice';
+import { TacheService } from 'src/app/demo/service/tache.sevice';
 import { Table } from 'primeng/table';
-import { MessageService, ConfirmationService } from 'primeng/api';
-
-interface expandedRows {
-    [key: string]: boolean;
-}
+import { forkJoin } from 'rxjs';
 
 @Component({
     templateUrl: './tabledemo.component.html',
-    providers: [MessageService, ConfirmationService]
+    providers: [ProjetService, TacheService]
 })
-export class TableDemoComponent implements OnInit {
+export class TabledemoComponent implements OnInit {
+    projets: Projet[] = [];
+    taches: Tache[] = [];
+    statuts: any[] = [];
+    responsables: any[] = [];
+    loading: boolean = false;
+    errorMessage: string = '';
 
-    customers1: Customer[] = [];
-
-    customers2: Customer[] = [];
-
-    customers3: Customer[] = [];
-
-    selectedCustomers1: Customer[] = [];
-
-    selectedCustomer: Customer = {};
-
-    representatives: Representative[] = [];
-
-    statuses: any[] = [];
-
-    products: Product[] = [];
-
-    rowGroupMetadata: any;
-
-    expandedRows: expandedRows = {};
-
-    activityValues: number[] = [0, 100];
-
-    isExpanded: boolean = false;
-
-    idFrozen: boolean = false;
-
-    loading: boolean = true;
+    projects: Projet[] = [];
 
     @ViewChild('filter') filter!: ElementRef;
 
-    constructor(private customerService: CustomerService, private productService: ProductService) { }
+    constructor(
+        private projetService: ProjetService,
+        private tacheService: TacheService
+    ) {}
 
-    ngOnInit() {
-        this.customerService.getCustomersLarge().then(customers => {
-            this.customers1 = customers;
-            this.loading = false;
+    ngOnInit(): void {
+        this.loading = true;
+        this.projetService.getAllProjets().subscribe({
+            next: (data) => (this.projects = data,
+                console.log('Projets chargés:', this.projects)
+            ),
 
-            // @ts-ignore
-            this.customers1.forEach(customer => customer.date = new Date(customer.date));
-        });
-        this.customerService.getCustomersMedium().then(customers => this.customers2 = customers);
-        this.customerService.getCustomersLarge().then(customers => this.customers3 = customers);
-        this.productService.getProductsWithOrdersSmall().then(data => this.products = data);
+            error: (err) => console.error('Erreur de chargement des projets:', err),
+          });
+                
 
-        this.representatives = [
-            { name: 'Amy Elsner', image: 'amyelsner.png' },
-            { name: 'Anna Fali', image: 'annafali.png' },
-            { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-            { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-            { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-            { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-            { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-            { name: 'Onyama Limba', image: 'onyamalimba.png' },
-            { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-            { name: 'XuXue Feng', image: 'xuxuefeng.png' }
-        ];
-
-        this.statuses = [
-            { label: 'Unqualified', value: 'unqualified' },
-            { label: 'Qualified', value: 'qualified' },
-            { label: 'New', value: 'new' },
-            { label: 'Negotiation', value: 'negotiation' },
-            { label: 'Renewal', value: 'renewal' },
-            { label: 'Proposal', value: 'proposal' }
-        ];
+        this.loadProjetsAvecTaches();
     }
 
-    onSort() {
-        this.updateRowGroupMetaData();
-    }
+    loadProjetsAvecTaches(): void {
+        this.projetService.getAllProjets().subscribe({
+            next: (projets) => {
+                const observables = projets.map(projet =>
+                    this.tacheService.getTachesByProjet(projet.id!)
+               );
 
-    updateRowGroupMetaData() {
-        this.rowGroupMetadata = {};
-
-        if (this.customers3) {
-            for (let i = 0; i < this.customers3.length; i++) {
-                const rowData = this.customers3[i];
-                const representativeName = rowData?.representative?.name || '';
-
-                if (i === 0) {
-                    this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-                }
-                else {
-                    const previousRowData = this.customers3[i - 1];
-                    const previousRowGroup = previousRowData?.representative?.name;
-                    if (representativeName === previousRowGroup) {
-                        this.rowGroupMetadata[representativeName].size++;
+                forkJoin(observables).subscribe({
+                    next: (tachesArray) => {
+                        this.projets = projets.map((projet, index) => ({
+                            ...projet,
+                            taches: tachesArray[index]
+                        }));
+                        this.taches = tachesArray.flat();
+                        this.loading = false;
+                    },
+                    error: (err) => {
+                        this.loading = false;
+                        this.errorMessage = 'Erreur lors du chargement des tâches.';
                     }
-                    else {
-                        this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-                    }
-                }
+                });
+            },
+            error: (err) => {
+                this.loading = false;
+                this.errorMessage = 'Erreur lors du chargement des projets.';
             }
-        }
-    }
-
-    expandAll() {
-        if (!this.isExpanded) {
-            this.products.forEach(product => product && product.name ? this.expandedRows[product.name] = true : '');
-
-        } else {
-            this.expandedRows = {};
-        }
-        this.isExpanded = !this.isExpanded;
-    }
-
-    formatCurrency(value: number) {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        });
     }
 
     onGlobalFilter(table: Table, event: Event) {
@@ -134,5 +78,80 @@ export class TableDemoComponent implements OnInit {
         table.clear();
         this.filter.nativeElement.value = '';
     }
-    
+
+    addProjet(projet: Projet): void {
+        this.projetService.addProjet(projet).subscribe({
+            next: (newProjet) => {
+                this.projets.push(newProjet);
+            },
+            error: (err) => {
+                this.errorMessage = 'Erreur lors de l\'ajout du projet.';
+            }
+        });
+    }
+
+    deleteProjet(projetId: string): void {
+        this.projetService.deleteProjet(projetId).subscribe({
+            next: () => {
+                this.projets = this.projets.filter(projet => projet.id !== projetId);
+            },
+            error: (err) => {
+                this.errorMessage = 'Erreur lors de la suppression du projet.';
+            }
+        });
+    }
+
+    updateProjet(projet: Projet): void {
+        if (projet.id) {
+            this.projetService.updateProjet(projet.id, projet).subscribe({
+                next: (updatedProjet) => {
+                    const index = this.projets.findIndex(p => p.id === updatedProjet.id);
+                    if (index !== -1) {
+                        this.projets[index] = updatedProjet;
+                    }
+                },
+                error: (err) => {
+                    this.errorMessage = 'Erreur lors de la mise à jour du projet.';
+                }
+            });
+        }
+    }
+
+    addTache(tache: Tache): void {
+        this.tacheService.addTache(tache).subscribe({
+            next: (newTache) => {
+                this.taches.push(newTache);
+            },
+            error: (err) => {
+                this.errorMessage = 'Erreur lors de l\'ajout de la tâche.';
+            }
+        });
+    }
+
+    deleteTache(tacheId: string): void {
+        this.tacheService.deleteTache(tacheId).subscribe({
+            next: () => {
+                this.taches = this.taches.filter(tache => tache.id !== tacheId);
+            },
+            error: (err) => {
+                this.errorMessage = 'Erreur lors de la suppression de la tâche.';
+            }
+        });
+    }
+
+    updateTache(tache: Tache): void {
+        if (tache.id) {
+            this.tacheService.updateTache(tache.id, tache).subscribe({
+                next: (updatedTache) => {
+                    const index = this.taches.findIndex(t => t.id === updatedTache.id);
+                    if (index !== -1) {
+                        this.taches[index] = updatedTache;
+                    }
+                },
+                error: (err) => {
+                    this.errorMessage = 'Erreur lors de la mise à jour de la tâche.';
+                }
+            });
+        }
+    }
 }

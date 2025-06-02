@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
+
 import { EvaluationComponent } from './demo/components/evaluation/evaluation.component';
 import { seanceComponent } from './demo/components/seance/seance.component';
+
+import {TabledemoComponent} from "./demo/components/uikit/table/tabledemo.component";
+
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
 };
 
-const routes: Routes = [
+
+const routes: Routes = [{ path: 'table-demo', component: TabledemoComponent },
+
 
     {
-        path: '', component: AppLayoutComponent,
+
+    path: '', component: AppLayoutComponent,
         children: [
             { path: 'evaluation', component: EvaluationComponent },
             { path: 'seance', component: seanceComponent },
@@ -31,6 +38,7 @@ const routes: Routes = [
             { path: 'blocks', data: { breadcrumb: 'Prime Blocks' }, loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
             { path: 'ecommerce', data: { breadcrumb: 'E-Commerce' }, loadChildren: () => import('./demo/components/ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
             { path: 'apps', data: { breadcrumb: 'Apps' }, loadChildren: () => import('./demo/components/apps/apps.module').then(m => m.AppsModule) },
+
 
         ]
     },

@@ -1,0 +1,70 @@
+<div class="card">
+    <span class="block text-900 font-bold text-xl mb-4">Modifier une Tâche</span>
+    <form (ngSubmit)="updateTache()" #tacheForm="ngForm" class="grid">
+        <!-- Colonne Gauche : Champs principaux -->
+        <div class="col-12 lg:col-8">
+            <div class="flex flex-column p-fluid">
+                <div class="mb-4">
+                    <label for="titre" class="block text-900 font-semibold mb-2">Titre</label>
+                    <input type="text" pInputText id="titre" name="titre" [(ngModel)]="tache.titre" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="description" class="block text-900 font-semibold mb-2">Description</label>
+                    <textarea pInputTextarea id="description" name="description" [(ngModel)]="tache.description" rows="5" [autoResize]="true"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="assigneA" class="block text-900 font-semibold mb-2">Assignée à</label>
+                    <input type="text" pInputText id="assigneA" name="assigneA" [(ngModel)]="tache.assigneA" />
+                </div>
+
+                <select id="etat" name="etat" [(ngModel)]="tache.etat" class="p-inputtext p-component w-full">
+                    <option *ngFor="let etat of StatutTacheEnum" [ngValue]="etat">{{ etat }}</option>
+                </select>
+
+
+                <div class="mb-4">
+                    <label for="avancement" class="block text-900 font-semibold mb-2">Avancement (%)</label>
+                    <input type="number" pInputText id="avancement" name="avancement" [(ngModel)]="tache.avancement" min="0" max="100" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne Droite : Détails + Boutons -->
+        <div class="col-12 lg:col-4">
+            <div class="border-1 surface-border border-round p-fluid mb-4">
+                <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Détails de la Tâche</span>
+                <div class="p-3">
+                    <div class="mb-4">
+                        <label for="dateDebut" class="block text-900 font-semibold mb-2">Date Début</label>
+                        <input type="datetime-local" pInputText id="dateDebut" name="dateDebut" [(ngModel)]="tache.dateDebut" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="dateFin" class="block text-900 font-semibold mb-2">Date Fin</label>
+                        <input type="datetime-local" pInputText id="dateFin" name="dateFin" [(ngModel)]="tache.dateFin" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="duree" class="block text-900 font-semibold mb-2">Durée</label>
+                        <input type="number" pInputText id="duree" name="duree" [(ngModel)]="tache.duree" min="0" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="typeDuree" class="block text-900 font-semibold mb-2">Type de Durée</label>
+                        <select id="typeDuree" name="typeDuree" [(ngModel)]="tache.typeDuree" class="p-inputtext p-component w-full">
+                            <option *ngFor="let type of TypeDureeEnum" [value]="type">{{ type }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="flex justify-content-between gap-3">
+                <button pButton pRipple type="button" class="p-button-danger flex-1 p-button-outlined" label="Annuler" icon="pi pi-times" (click)="router.navigate(['/apps/tache/list'])"></button>
+                <button pButton pRipple type="submit" class="p-button-primary flex-1" label="Modifier" icon="pi pi-check"></button>
+            </div>
+        </div>
+    </form>
+</div>

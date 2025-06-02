@@ -34,11 +34,19 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ClassementComponent } from './gestion-notes/note/classement/classement.component';
  
 
+import {TableDemoModule} from "./demo/components/uikit/table/tabledemo.module";
+import { InputTextModule } from 'primeng/inputtext';
+
+
+
+
 @NgModule({
     declarations: [
         AppComponent,
+
         seanceComponent,
         EmploiComponent,
+
     ],
     imports: [
         ToastModule,
@@ -62,7 +70,14 @@ import { ClassementComponent } from './gestion-notes/note/classement/classement.
         CardModule,
         InputNumberModule,
         FullCalendarModule,
-    CalendarModule
+        CalendarModule,
+        TableDemoModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        TableModule,
+        ButtonModule,
+        InputTextModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },MessageService

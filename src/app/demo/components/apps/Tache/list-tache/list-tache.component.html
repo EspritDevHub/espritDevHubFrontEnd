@@ -1,0 +1,83 @@
+<div class="col-12 md:col-12">
+    <div class="card widget-table">
+        <div class="card-header line-height-4 mb-4">
+            <h5>📋 Liste des Tâches</h5>
+        </div>
+
+        <!-- Statistiques sous forme de cartes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="p-4 rounded-xl shadow-md border-l-4 border-blue-500 bg-blue-50">
+                <h3 class="text-md font-semibold text-blue-700">📊 Moyenne des écarts</h3>
+                <p class="text-xl font-bold mt-2 text-blue-900">
+                    {{ stats['moyenneEcart'] | number: '1.2-2' }}
+                </p>
+            </div>
+
+            <div class="p-4 rounded-xl shadow-md border-l-4 border-green-500 bg-green-50">
+                <h3 class="text-md font-semibold text-green-700">🎯 Taux de précision</h3>
+                <p class="text-xl font-bold mt-2 text-green-900">
+                    {{ stats['tauxPrecisionEstimation'] | number: '1.0-2' }}%
+                </p>
+            </div>
+
+            <div class="p-4 rounded-xl shadow-md border-l-4 border-yellow-500 bg-yellow-50">
+                <h3 class="text-md font-semibold text-yellow-700">⬆️ Sous-estimées</h3>
+                <p class="text-xl font-bold mt-2 text-yellow-900">
+                    {{ stats['tauxTachesSousEstimees'] | number: '1.0-2' }}%
+                </p>
+            </div>
+
+            <div class="p-4 rounded-xl shadow-md border-l-4 border-red-500 bg-red-50">
+                <h3 class="text-md font-semibold text-red-700">⬇️ Surestimées</h3>
+                <p class="text-xl font-bold mt-2 text-red-900">
+                    {{ stats['tauxTachesSurestimees'] | number: '1.0-2' }}%
+                </p>
+            </div>
+        </div>
+
+        <!-- Bouton Ajouter -->
+        <div class="mb-4">
+            <button pButton type="button" icon="pi pi-plus" class="p-button-success p-button-sm"
+                    [routerLink]="['/apps/tache/add']"> Ajouter Tâche
+            </button>
+        </div>
+
+        <!-- Tableau des tâches -->
+        <p-table [value]="taches" [paginator]="true" [rows]="5" [rowHover]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Assigné à</th>
+                    <th>État</th>
+                    <th>Avancement</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Actions</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-tache>
+                <tr>
+                    <td>{{ tache.titre }}</td>
+                    <td>{{ tache.description }}</td>
+                    <td>{{ tache.assigneA }}</td>
+                    <td>{{ tache.etat }}</td>
+                    <td>{{ tache.avancement }} %</td>
+                    <td>{{ tache.dateDebut | date: 'short' }}</td>
+                    <td>{{ tache.dateFin | date: 'short' }}</td>
+                    <td>
+                        <button pButton type="button" icon="pi pi-trash" class="p-button-danger p-button-sm me-2"
+                                (click)="deleteTache(tache.id)"></button>
+
+                        <button pButton type="button" icon="pi pi-pencil" class="p-button-warning p-button-sm me-2"
+                                [routerLink]="['/apps/tache/edit', tache.id]"></button>
+
+                        <button pButton type="button" icon="pi pi-info-circle" class="p-button-info p-button-sm"
+                                [routerLink]="['/apps/tache/details', tache.id]"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div *ngIf="tache; else loading">
+    <h2>Détails de la Tâche</h2>
+
+    <div class="task-details">
+        <p><strong>ID :</strong> {{ tache.id }}</p>
+        <p><strong>Titre :</strong> {{ tache.titre }}</p>
+        <p><strong>Description :</strong> {{ tache.description }}</p>
+        <p><strong>Assignée à :</strong> {{ tache.assigneA }}</p>
+        <p><strong>Date de début :</strong> {{ tache.dateDebut | date: 'short' }}</p>
+        <p><strong>Date de fin :</strong> {{ tache.dateFin | date: 'short' }}</p>
+        <p><strong>État :</strong> {{ tache.etat }}</p>
+        <p><strong>Avancement :</strong> {{ tache.avancement }}%</p>
+        <p><strong>Durée estimée :</strong> {{ tache.duree }} {{ tache.typeDuree }}</p>
+    </div>
+
+    <button [routerLink]="['/apps/tache/list']" class="btn btn-secondary">Retour à la liste</button>
+</div>
+
+<ng-template #loading>
+    <p>Chargement des détails de la tâche...</p>
+</ng-template>
+
