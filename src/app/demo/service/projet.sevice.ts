@@ -18,6 +18,10 @@ export class ProjetService {
             catchError(this.handleError)
         );
     }
+    getRisqueRetard(id: string) {
+        return this.http.get<{ score: number; interpretation: string }>(`${this.apiUrl}/${id}/risque-retard`);
+    }
+
 
     getProjetById(id: string): Observable<Projet> {
         return this.http.get<Projet>(`${this.apiUrl}/${id}`).pipe(

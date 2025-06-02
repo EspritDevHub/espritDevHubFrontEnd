@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 export class DetailsProjectComponent {
     projetId!: string;
     projet!: Projet;
+    risqueRetard: { score: number; interpretation: string } | null = null;
 
     constructor(
         private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class DetailsProjectComponent {
     ngOnInit(): void {
         this.projetId = this.route.snapshot.paramMap.get('id')!;
         this.getProjetDetails();
+        this.getRisqueRetard();
     }
 
     getProjetDetails(): void {
@@ -41,6 +43,27 @@ export class DetailsProjectComponent {
             },
         });
     }
+    getRisqueRetard(): void {
+        this.projetService.getRisqueRetard(this.projetId).subscribe({
+            next: (res) => {
+                this.risqueRetard = res;
+            },
+            error: (err) => {
+                console.error('Erreur lors de la récupération du risque de retard', err);
+            },
+        });
+    }
+    getCouleurRisque(interpretation: string): string {
+        if (interpretation.toLowerCase().includes('élevé')) {
+            return 'red';
+        } else if (interpretation.toLowerCase().includes('modéré')) {
+            return 'orange';
+        } else if (interpretation.toLowerCase().includes('faible')) {
+            return 'green';
+        }
+        return 'gray'; // par défaut
+    }
+
 
 
 }
