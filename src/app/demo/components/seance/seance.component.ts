@@ -67,8 +67,11 @@ calendarOptions: CalendarOptions = {
 updateCalendarEvents(): void {
   this.calendarOptions.events = this.seances.map(s => {
     const date = new Date(s.date);
-    const start = `${date.toISOString().split('T')[0]}T${s.heureDebut}`;
-    const end = `${date.toISOString().split('T')[0]}T${s.heureFin}`;
+    const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    const start = `${dateStr}T${s.heureDebut}`;
+    const end = `${dateStr}T${s.heureFin}`;
 
     return {
       id: s.id.toString(),
@@ -231,16 +234,17 @@ isValidSeance(): boolean {
     !!heureFin;
 
   const isDateValid = date ? new Date(date).getTime() > this.getTomorrow().getTime() : false;
+  const isNotSunday = new Date(date).getDay() !== 0; // Ne pas planifier le dimanche
   const isTimeValid = this.isHeureValide();
 
-  return isRequiredFieldsFilled && isDateValid && isTimeValid;
+  return isRequiredFieldsFilled && isDateValid && isNotSunday && isTimeValid;
 }
 
   getTomorrow(): Date {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() );
+    tomorrow.setDate(today.getDate() +1 );
     return tomorrow;
   }
 
