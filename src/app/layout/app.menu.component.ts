@@ -42,41 +42,7 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-
-
-                
-                     {
-                        label: 'Projet',
-                        icon: 'pi pi-fw pi-comment',
-                        items: [
-                            {
-                                label: 'List ',
-                                icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/projet/list']
-                            },
-                            {
-                                label: 'Add',
-                                icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/projet/add']
-                            }
-                        ]
-                    },
-                     {
-                        label: 'Tache',
-                        icon: 'pi pi-fw pi-comment',
-                        items: [
-                            {
-                                label: 'List',
-                                icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/tache/list']
-                            },
-                            {
-                                label: 'Add',
-                                icon: 'pi pi-fw pi-list',
-                                routerLink: ['/apps/tache/add']
-                            }
-                        ]
-                    },
+    
                     {
                         label: 'Document',
                         icon: 'pi pi-fw pi-comment',
@@ -170,6 +136,38 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+            {
+                        label: 'Projet',
+                        icon: 'pi pi-fw pi-comment',
+                        items: [
+                            {
+                                label: 'List ',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/projet/list']
+                            },
+                            {
+                                label: 'Add',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/projet/add']
+                            }
+                        ]
+                    },
+                     {
+                        label: 'Tache',
+                        icon: 'pi pi-fw pi-comment',
+                        items: [
+                            {
+                                label: 'List',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/tache/list']
+                            },
+                            {
+                                label: 'Add',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/apps/tache/add']
+                            }
+                        ]
+                    },
          
            
         ];
