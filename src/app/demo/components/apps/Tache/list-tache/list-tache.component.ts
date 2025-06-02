@@ -29,11 +29,20 @@ export class ListTacheComponent implements OnInit {
     private tacheService = inject(TacheService);
 
     taches: Tache[] = [];
+    stats: { [key: string]: number } = {};
 
     ngOnInit(): void {
         this.tacheService.getAllTaches().subscribe({
             next: (data) => (this.taches = data),
             error: (err) => console.error('Erreur de chargement des tâches:', err),
+        });
+        this.tacheService.getTacheStatistiques().subscribe({
+            next: (data) => {
+                this.stats = data
+                console.log(this.stats)
+            },
+
+            error: (err) => console.error('Erreur de chargement des statistiques:', err),
         });
     }
 

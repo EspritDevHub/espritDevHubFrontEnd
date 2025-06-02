@@ -27,6 +27,10 @@ export class TacheService {
             catchError(this.handleError)
         );
     }
+    getTacheStatistiques(): Observable<{ [key: string]: number }> {
+        return this.http.get<{ [key: string]: number }>('http://localhost:8086/api/taches/taches/statistiques');
+    }
+
 
 
     // Récupérer une tâche par ID
