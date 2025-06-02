@@ -127,6 +127,17 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+            {
+                label: 'Groups',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Groups',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['auth/groups']
+                    }
+                ]
+            },
          
            
         ];
