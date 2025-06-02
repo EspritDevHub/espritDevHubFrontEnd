@@ -12,6 +12,7 @@
                     <th>Titre</th>
                     <th>Description</th>
                     <th>État</th>
+                    <th>Retard</th>
                     <th>Étape</th>
                     <th>Date Début</th>
                     <th>Date Fin</th>
@@ -25,9 +26,11 @@
                     <td>{{ project.titre }}</td>
                     <td>{{ project.description }}</td>
                     <td>{{ project.etat }}</td>
+                    <td>{{ project.retard }}</td>
                     <td>{{ project.etapeProjet }}</td>
                     <td>{{ project.dateDebut | date: 'shortDate' }}</td>
                     <td>{{ project.dateFinPrevu | date: 'shortDate' }}</td>
+
                     <td>
                         <!-- Boutons -->
                         <button pButton type="button" icon="pi pi-trash" class="p-button-danger p-button-sm me-2"
