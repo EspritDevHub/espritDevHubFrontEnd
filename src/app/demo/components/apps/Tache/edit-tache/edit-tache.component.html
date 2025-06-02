@@ -19,12 +19,10 @@
                     <input type="text" pInputText id="assigneA" name="assigneA" [(ngModel)]="tache.assigneA" />
                 </div>
 
-                <div class="mb-4">
-                    <label for="etat" class="block text-900 font-semibold mb-2">État</label>
-                    <select id="etat" name="etat" [(ngModel)]="tache.etat" class="p-inputtext p-component w-full">
-                        <option *ngFor="let etat of StatutTacheEnum" [value]="etat">{{ etat }}</option>
-                    </select>
-                </div>
+                <select id="etat" name="etat" [(ngModel)]="tache.etat" class="p-inputtext p-component w-full">
+                    <option *ngFor="let etat of StatutTacheEnum" [ngValue]="etat">{{ etat }}</option>
+                </select>
+
 
                 <div class="mb-4">
                     <label for="avancement" class="block text-900 font-semibold mb-2">Avancement (%)</label>

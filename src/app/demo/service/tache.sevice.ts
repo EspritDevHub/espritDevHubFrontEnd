@@ -19,6 +19,9 @@ export class TacheService {
             catchError(this.handleError)
         );
     }
+    notifierChangement(ancienne: Tache, nouvelle: Tache): Observable<string> {
+        return this.http.post(`${this.apiUrl}/notifier-changement`, { ancienne, nouvelle }, { responseType: 'text' });
+    }
     getAllTaches(): Observable<Tache[]> {
         return this.http.get<Tache[]>(this.apiUrl).pipe(
             catchError(this.handleError)
