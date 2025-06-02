@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {Projet} from "../../../../api/projet";
+
 import {ProjetService} from "../../../../service/projet.sevice";
 import {Router} from "@angular/router";
-import {EtatProjetEnum} from "../../../../api/etat-projet.enum";
-import {EtapeProjetEnum} from "../../../../api/etape-projet.enum";
+
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";

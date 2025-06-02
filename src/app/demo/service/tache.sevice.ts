@@ -19,6 +19,12 @@ export class TacheService {
             catchError(this.handleError)
         );
     }
+    getAllTaches(): Observable<Tache[]> {
+        return this.http.get<Tache[]>(this.apiUrl).pipe(
+            catchError(this.handleError)
+        );
+    }
+
 
     // Récupérer une tâche par ID
     getTacheById(id: string): Observable<Tache> {

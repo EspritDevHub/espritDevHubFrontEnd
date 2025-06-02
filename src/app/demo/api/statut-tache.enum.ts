@@ -1,6 +1,5 @@
 export enum StatutTacheEnum {
-    EN_ATTENTE = 'EN_ATTENTE',
-    EN_COURS = 'EN_COURS',
-    TERMINEE = 'TERMINEE',
-    ANNULEE = 'ANNULEE'
+    NON_COMMENCEE = 'Non commencée',
+    EN_COURS = 'En cours',
+    TERMINEE = 'Terminée',
 }
