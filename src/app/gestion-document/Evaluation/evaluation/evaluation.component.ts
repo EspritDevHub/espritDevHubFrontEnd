@@ -147,10 +147,8 @@ console.log("cc",doc.nomFichier)
       }
     });
   }
- // Structure pour gérer l'ouverture des étudiants
  openedEtudiants: Record<string, Record<string, boolean>> = {};
 
- // ...
 
  toggleEtudiant(seanceKey: string, etudiantKey: string): void {
    if (!this.openedEtudiants[seanceKey]) {
@@ -172,6 +170,9 @@ console.log("cc",doc.nomFichier)
       console.error('Erreur lors de l’évaluation PDF:', err);
     });
   }
+  
+
+
   
   
 }
