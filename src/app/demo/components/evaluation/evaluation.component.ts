@@ -15,7 +15,7 @@ interface EvaluationWithEdit extends Evaluation {
 })
 
 
-export class EvaluationComponents {
+export class EvaluationComponent {
   products: Product[] = [];
   evaluations: EvaluationWithEdit[] = [];
   displayModal: boolean = false;

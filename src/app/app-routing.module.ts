@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 
-import { EvaluationComponents } from './demo/components/evaluation/evaluation.component';
 import { seanceComponent } from './demo/components/seance/seance.component';
 
 import {TabledemoComponent} from "./demo/components/uikit/table/tabledemo.component";
+import { EvaluationComponent } from './demo/components/evaluation/evaluation.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -19,8 +19,8 @@ const routes: Routes = [{ path: 'table-demo', component: TabledemoComponent },
 
     path: '', component: AppLayoutComponent,
         children: [
-            { path: 'evaluation', component: EvaluationComponents },
             { path: 'seance', component: seanceComponent },
+             { path: 'evaluation', component: EvaluationComponent },
             { path: '', loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
             { path: 'criteres', loadChildren: () => import('./gestion-notes/CritereEvaluation/critere-evaluation.module').then(m => m.CriteresModule) },
             { path: 'seances', loadChildren: () => import('./gestion-notes/seance/seance.module').then(m => m.SeanceModule) },
