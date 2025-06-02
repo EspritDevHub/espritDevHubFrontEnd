@@ -7,12 +7,12 @@ import { CritereEvaluationDTO } from './critere-evaluation.model';
   providedIn: 'root'
 })
 export class CritereEvaluationService {
-  private apiUrl = 'http://localhost:9091/api/criteres'; // URL centrale pour toutes les requêtes
+  private apiUrl = 'http://localhost:9097/api/criteres'; // URL centrale pour toutes les requêtes
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<CritereEvaluationDTO[]> {
-    return this.http.get<CritereEvaluationDTO[]>('http://localhost:9091/api/criteres');
+    return this.http.get<CritereEvaluationDTO[]>('http://localhost:9097/api/criteres');
   }
   create(critere: CritereEvaluationDTO): Observable<CritereEvaluationDTO> {
     return this.http.post<CritereEvaluationDTO>(this.apiUrl, critere);
@@ -28,12 +28,12 @@ export class CritereEvaluationService {
   
   deleteCriteres(ids: string[]) {
     // Effectuer la suppression multiple des critères par leur ID
-    return this.http.delete(`http://localhost:9091/api/criteres`, { 
+    return this.http.delete(`http://localhost:9097/api/criteres`, { 
       body: { ids }  // Passer les IDs des critères à supprimer
     });
   }
 
-  private apiUrlcritere = 'http://localhost:9091/api/criteres';
+  private apiUrlcritere = 'http://localhost:9097/api/criteres';
 
 
   getAllSprints(): Observable<any[]> {
@@ -43,7 +43,7 @@ export class CritereEvaluationService {
 
 
 getCriteresBySprintId(sprintId: string): Observable<CritereEvaluationDTO[]> {
-  return this.http.get<CritereEvaluationDTO[]>(`http://localhost:9091/api/criteres/sprints/${sprintId}`);
+  return this.http.get<CritereEvaluationDTO[]>(`http://localhost:9097/api/criteres/sprints/${sprintId}`);
 }
 
 

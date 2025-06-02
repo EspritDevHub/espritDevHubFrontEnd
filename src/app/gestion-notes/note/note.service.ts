@@ -22,7 +22,7 @@ export interface Note {
 
 
 export class NoteService {
-  private baseUrl = 'http://localhost:9091/api/notes'; // adapte au bon port
+  private baseUrl = 'http://localhost:9097/api/notes'; // adapte au bon port
 
   constructor(private http: HttpClient) {}
 
@@ -43,11 +43,11 @@ getRecommandations(matiere: string, note: number): Observable<any[]> {
 
 
   getClassement(): Observable<any> {
-    return this.http.get('http://localhost:9091/api/classement/top-etudiants');
+    return this.http.get('http://localhost:9097/api/classement/top-etudiants');
   }
 
   getReussite(): Observable<any> {
-    return this.http.get('http://localhost:9091/api/classement/reussite');
+    return this.http.get('http://localhost:9097/api/classement/reussite');
   }
 }
 

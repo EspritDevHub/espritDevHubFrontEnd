@@ -39,12 +39,12 @@ chartData: ChartData<'bar'> = {
   }
 
   getClassement() {
-    this.http.get<any>('http://localhost:9091/api/classement/top-etudiants')
+    this.http.get<any>('http://localhost:9097/api/classement/top-etudiants')
       .subscribe(res => this.classement = res.classement);
   }
 
   getReussite() {
-    this.http.get<any[]>('http://localhost:9091/api/classement/reussite')
+    this.http.get<any[]>('http://localhost:9097/api/classement/reussite')
       .subscribe(res => {
         this.reussiteStats = res;
         this.updateChart();

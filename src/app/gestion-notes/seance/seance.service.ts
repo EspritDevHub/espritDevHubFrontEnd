@@ -32,7 +32,7 @@ export class SeanceService {
 
 
 
-  private apiUrlcriteresseances = 'http://localhost:9091/api/criteres/';
+  private apiUrlcriteresseances = 'http://localhost:9097/api/criteres/';
 
   affecterCriteres(id: string, criteres: string[]): Observable<void> {
     return this.http.post<void>(`${this.apiUrlcriteresseances}affecter-criteres/${id}`, criteres);
@@ -52,7 +52,7 @@ export class SeanceService {
     return this.http.get<any[]>(`${this.apiUrl}/sprints/sprint/${sprintId}`);
   }
 
-  private apiUrlcritere = 'http://localhost:9091/api/criteres';
+  private apiUrlcritere = 'http://localhost:9097/api/criteres';
 
   getAllSprints(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrlcritere}/sprints`);
@@ -62,7 +62,7 @@ export class SeanceService {
     return this.http.get<any>(`http://localhost:9092/api/seances/${seanceId}`);
   }
   
-  private apiUrlcriteresprint = 'http://localhost:9091/api/criteres/sprints/';
+  private apiUrlcriteresprint = 'http://localhost:9097/api/criteres/sprints/';
 
   getCriteriaBySprint(sprintId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrlcriteresprint}${sprintId}`);
@@ -85,7 +85,7 @@ export class SeanceService {
 
 
 
-  private apiUrlnotes = 'http://localhost:9091/api/notes';
+  private apiUrlnotes = 'http://localhost:9097/api/notes';
 
 
   noterEtudiant(note: Note): Observable<Note> {
