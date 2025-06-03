@@ -1,0 +1,83 @@
+<div class="card">
+    <span class="block text-900 font-bold text-xl mb-4">Modifier une Annonce</span>
+
+    <form (ngSubmit)="updateAnnoc()" #annocForm="ngForm" class="grid">
+        <div class="col-12 lg:col-8">
+            <div class="flex flex-column p-fluid">
+
+                <!-- Titre -->
+                <div class="mb-4">
+                    <label for="title" class="block text-900 font-semibold mb-2">Titre</label>
+                    <input
+                        pInputText
+                        type="text"
+                        id="title"
+                        name="title"
+                        [(ngModel)]="annoc.title"
+                        #title="ngModel"
+                        required
+                        maxlength="100"
+                    />
+                    <small class="text-red-500" *ngIf="title.invalid && title.touched">
+                        Le titre est requis.
+                    </small>
+                </div>
+
+                <!-- Contenu -->
+                <div class="mb-4">
+                    <label for="content" class="block text-900 font-semibold mb-2">Contenu</label>
+                    <textarea
+                        pInputTextarea
+                        id="content"
+                        name="content"
+                        rows="5"
+                        [(ngModel)]="annoc.content"
+                        #content="ngModel"
+                        required
+                    ></textarea>
+                    <small class="text-red-500" *ngIf="content.invalid && content.touched">
+                        Le contenu est requis.
+                    </small>
+                </div>
+
+                <!-- Actif -->
+                <div class="mb-4">
+                    <label for="isActive" class="block text-900 font-semibold mb-2">Annonce active ?</label>
+                    <select
+                        id="isActive"
+                        name="isActive"
+                        [(ngModel)]="annoc.isActive"
+                        required
+                        class="p-inputtext p-component"
+                    >
+                        <option [ngValue]="true">Oui</option>
+                        <option [ngValue]="false">Non</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="col-12 lg:col-4">
+            <div class="flex justify-content-between gap-3">
+                <button
+                    pButton
+                    type="button"
+                    class="p-button-secondary flex-1"
+                    icon="pi pi-refresh"
+                    label="Réinitialiser"
+                    (click)="resetForm()"
+                ></button>
+
+                <button
+                    pButton
+                    type="submit"
+                    class="p-button-primary flex-1"
+                    icon="pi pi-save"
+                    label="Mettre à jour"
+                    [disabled]="annocForm.invalid"
+                ></button>
+            </div>
+        </div>
+    </form>
+</div>

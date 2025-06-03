@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
         { path: 'tache', data: { breadcrumb: 'Tache' }, loadChildren: () => import('./Tache/tache.module').then(m => m.TacheModule) },
         { path: 'blog', data: { breadcrumb: 'Blog' }, loadChildren: () => import('./blog/blog.app.module').then(m => m.BlogAppModule) },
         { path: 'event', data: { breadcrumb: 'Event' }, loadChildren: () => import('./Event/event.module').then(m => m.EventModule) },
+        { path: 'annoc', data: { breadcrumb: 'Annoc' }, loadChildren: () => import('./Anouncement/annoc.module').then(m => m.AnnocModule) },
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

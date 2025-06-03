@@ -1,45 +1,11 @@
-<div *ngIf="projet">
-    <h2>Détails du Projet : {{ projet.titre }}</h2>
-    <p><strong>Code :</strong> {{ projet.code }}</p>
-    <p><strong>Description :</strong> {{ projet.description }}</p>
-    <p><strong>État :</strong> {{ projet.etat || 'N/A' }}</p>
-    <p><strong>Étape :</strong> {{ projet.etapeProjet || 'N/A' }}</p>
-    <p><strong>Date Début :</strong> {{ projet.dateDebut | date: 'shortDate' }}</p>
-    <p><strong>Date Fin Prévue :</strong> {{ projet.dateFinPrevu | date: 'shortDate' }}</p>
-    <p><strong>Créé par :</strong> {{ projet.createdBy }}</p>
-    <p><strong>Date de Création :</strong> {{ projet.creationDate || 'Non définie' }}</p>
-
-    <div *ngIf="projet.jalons && projet.jalons.length > 0">
-        <h3>Jalons</h3>
-        <ul>
-            <li *ngFor="let jalon of projet.jalons">
-                <strong>{{ jalon.nom }}</strong> :
-                du {{ jalon.dateDebut | date: 'shortDate' }} au {{ jalon.dateFin | date: 'shortDate' }}
-            </li>
-        </ul>
-    </div>
-    <div *ngIf="risqueRetard" class="p-card p-3 mt-4 border border-gray-200 rounded">
-        <h3 class="text-lg font-bold mb-2">📊 Risque de retard</h3>
-        <p><strong>Score :</strong> {{ risqueRetard.score | number: '1.2-2' }}</p>
-        <p>
-            <strong>Interprétation :</strong>
-            <span
-                [ngStyle]="{
-                    'display': 'inline-block',
-                    'width': '12px',
-                    'height': '12px',
-                    'border-radius': '50%',
-                    'margin-right': '8px',
-                    'background-color': getCouleurRisque(risqueRetard.interpretation)
-                }"
-            ></span>
-            {{ risqueRetard.interpretation }}
-        </p>
-    </div>
-
-
-    <div *ngIf="!projet.jalons || projet.jalons.length === 0">
-        <p><em>Aucun jalon défini pour ce projet.</em></p>
-    </div>
+<div *ngIf="event">
+    <h2>Détails de l'événement : {{ event.title }}</h2>
+    <p><strong>Description :</strong> {{ event.description || 'Aucune' }}</p>
+    <p><strong>Type :</strong> {{ event.eventType || 'Non défini' }}</p>
+    <p><strong>Lieu :</strong> {{ event.location || 'Non défini' }}</p>
+    <p><strong>Organisateur :</strong> {{ event.organizer || 'Non défini' }}</p>
+    <p><strong>Date de début :</strong> {{ event.startDate | date: 'short' }}</p>
+    <p><strong>Date de fin :</strong> {{ event.endDate ? (event.endDate | date: 'short') : 'Non définie' }}</p>
+    <p><strong>Projet lié :</strong> {{ event.projectId || 'Aucun' }}</p>
+    <p><strong>État :</strong> {{ event.isActive ? 'Actif' : 'Inactif' }}</p>
 </div>
-

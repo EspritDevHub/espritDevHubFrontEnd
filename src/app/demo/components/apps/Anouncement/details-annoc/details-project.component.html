@@ -1,0 +1,11 @@
+<div *ngIf="annoc">
+    <h2>Détails de l'annonce : {{ annoc.title }}</h2>
+
+    <p><strong>Contenu :</strong> {{ annoc.content || 'Aucun contenu' }}</p>
+
+    <p><strong>Date de création :</strong> {{ annoc.createdAt | date: 'short' }}</p>
+
+    <p><strong>Dernière mise à jour :</strong> {{ annoc.updatedAt | date: 'short' }}</p>
+
+    <p><strong>État :</strong> {{ annoc.isActive ? 'Active' : 'Inactive' }}</p>
+</div>

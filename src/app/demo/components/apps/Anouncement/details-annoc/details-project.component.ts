@@ -4,6 +4,8 @@ import {DatePipe} from "@angular/common";
 import { CommonModule } from '@angular/common';
 import {EventService} from "../../../../service/event.service";
 import {Event} from "../../../../module/event";
+import {AnnocService} from "../../../../service/annoc.service";
+import {Annoc} from "../../../../module/annoc";
 
 @Component({
     selector: 'app-details-project',
@@ -17,24 +19,22 @@ import {Event} from "../../../../module/event";
     ]
 })
 export class EventDetailsComponent implements OnInit {
-    eventId!: string;
-    event!: Event;
+    annocId!: string;
+    annoc!: Annoc;
 
     constructor(
         private route: ActivatedRoute,
-        private eventService: EventService
+        private eventService: AnnocService
     ) {}
 
     ngOnInit(): void {
-        this.eventId = this.route.snapshot.paramMap.get('id')!;
+        this.annocId = this.route.snapshot.paramMap.get('id')!;
         this.getEventDetails();
     }
 
     getEventDetails(): void {
-        this.eventService.getById(this.eventId).subscribe({
-            next: (data: Event) => {
-                this.event = data;
-            },
+        this.eventService.getById(this.annocId).subscribe({
+            next: (data) => (this.annoc = data),
             error: (err) => {
                 console.error('Erreur lors de la récupération de l’événement', err);
             }
