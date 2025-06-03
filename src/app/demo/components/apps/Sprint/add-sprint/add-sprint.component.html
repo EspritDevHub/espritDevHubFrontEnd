@@ -1,0 +1,136 @@
+<div class="card">
+    <span class="block text-900 font-bold text-xl mb-4">{{ sprint?.id ? 'Modifier un Sprint' : 'Ajouter un Sprint' }}</span>
+
+    <form (ngSubmit)="onSubmit()" #sprintForm="ngForm" class="grid">
+        <div class="col-12 lg:col-8">
+            <div class="flex flex-column p-fluid">
+
+                <!-- Titre -->
+                <div class="mb-4">
+                    <label for="title" class="block text-900 font-semibold mb-2">Titre</label>
+                    <input
+                        pInputText
+                        type="text"
+                        id="title"
+                        name="title"
+                        [(ngModel)]="sprint.title"
+                        #title="ngModel"
+                        required
+                        maxlength="100"
+                    />
+                    <small class="text-red-500" *ngIf="title.invalid && title.touched">
+                        Le titre est requis.
+                    </small>
+                </div>
+
+                <!-- Phase -->
+                <div class="mb-4">
+                    <label for="phaseId" class="block text-900 font-semibold mb-2">Phase</label>
+                    <select
+                        id="phaseId"
+                        name="phaseId"
+                        [(ngModel)]="sprint.phaseId"
+                        #phaseId="ngModel"
+                        required
+                        class="p-inputtext p-component"
+                    >
+                        <option value="" disabled>-- Sélectionnez une phase --</option>
+                        <option *ngFor="let phase of phases" [value]="phase.id">{{ phase.name }}</option>
+                    </select>
+                    <small class="text-red-500" *ngIf="phaseId.invalid && phaseId.touched">
+                        La phase est requise.
+                    </small>
+                </div>
+
+                <!-- Date de début -->
+                <div class="mb-4">
+                    <label for="startDate" class="block text-900 font-semibold mb-2">Date de début</label>
+                    <input
+                        pInputText
+                        type="date"
+                        id="startDate"
+                        name="startDate"
+                        [(ngModel)]="sprint.startDate"
+                        #startDate="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="startDate.invalid && startDate.touched">
+                        La date de début est requise.
+                    </small>
+                </div>
+
+                <!-- Date de fin -->
+                <div class="mb-4">
+                    <label for="endDate" class="block text-900 font-semibold mb-2">Date de fin</label>
+                    <input
+                        pInputText
+                        type="date"
+                        id="endDate"
+                        name="endDate"
+                        [(ngModel)]="sprint.endDate"
+                        #endDate="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="endDate.invalid && endDate.touched">
+                        La date de fin est requise.
+                    </small>
+                </div>
+
+                <!-- Statut -->
+                <div class="mb-4">
+                    <label for="status" class="block text-900 font-semibold mb-2">Statut</label>
+                    <input
+                        pInputText
+                        type="text"
+                        id="status"
+                        name="status"
+                        [(ngModel)]="sprint.status"
+                        #status="ngModel"
+                        required
+                    />
+                    <small class="text-red-500" *ngIf="status.invalid && status.touched">
+                        Le statut est requis.
+                    </small>
+                </div>
+
+                <!-- Actif -->
+                <div class="mb-4">
+                    <label for="active" class="block text-900 font-semibold mb-2">Sprint actif ?</label>
+                    <select
+                        id="active"
+                        name="active"
+                        [(ngModel)]="sprint.active"
+                        required
+                        class="p-inputtext p-component"
+                    >
+                        <option [ngValue]="true">Oui</option>
+                        <option [ngValue]="false">Non</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boutons -->
+        <div class="col-12 lg:col-4">
+            <div class="flex justify-content-between gap-3">
+                <button
+                    pButton
+                    type="button"
+                    class="p-button-secondary flex-1"
+                    icon="pi pi-refresh"
+                    label="Réinitialiser"
+                    (click)="resetForm()"
+                ></button>
+
+                <button
+                    pButton
+                    type="submit"
+                    class="p-button-primary flex-1"
+                    icon="pi pi-save"
+                    label="{{ sprint?.id ? 'Mettre à jour' : 'Ajouter' }}"
+                    [disabled]="sprintForm.invalid"
+                ></button>
+            </div>
+        </div>
+    </form>
+</div>

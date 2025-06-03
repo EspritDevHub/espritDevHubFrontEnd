@@ -199,6 +199,21 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/apps/annoc/add']
                             }
                         ]
+                    }, {
+                        label: 'Sprint',
+                        icon: 'pi pi-fw pi-comment',
+                        items: [
+                            {
+                                label: 'List',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/sprint/list']
+                            },
+                            {
+                                label: 'Add',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/apps/sprint/add']
+                            }
+                        ]
                     },
 
 

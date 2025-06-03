@@ -1,0 +1,17 @@
+<div *ngIf="sprint">
+    <h2>Détails du sprint : {{ sprint.title }}</h2>
+
+    <p><strong>Nom de la phase :</strong> {{ sprint.phaseName || 'Non défini' }}</p>
+
+    <p><strong>Date de début :</strong> {{ sprint.startDate | date: 'short' }}</p>
+
+    <p><strong>Date de fin :</strong> {{ sprint.endDate | date: 'short' }}</p>
+
+    <p><strong>Statut :</strong> {{ sprint.status }}</p>
+
+    <p><strong>État :</strong> {{ sprint.active ? 'Actif' : 'Inactif' }}</p>
+</div>
+
+<div *ngIf="!sprint">
+    <p>Sprint introuvable...</p>
+</div>
