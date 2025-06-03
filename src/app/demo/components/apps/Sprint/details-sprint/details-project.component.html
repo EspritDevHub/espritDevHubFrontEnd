@@ -11,6 +11,18 @@
 
     <p><strong>État :</strong> {{ sprint.active ? 'Actif' : 'Inactif' }}</p>
 </div>
+<div *ngIf="currentSprints.length; else noSprints">
+    <h3>Sprints en cours</h3>
+    <ul>
+        <li *ngFor="let sprint of currentSprints">
+            {{ sprint.title }} (du {{ sprint.startDate | date:'shortDate' }} au {{ sprint.endDate | date:'shortDate' }})
+        </li>
+    </ul>
+</div>
+
+<ng-template #noSprints>
+    <p>Aucun sprint en cours.</p>
+</ng-template>
 
 <div *ngIf="!sprint">
     <p>Sprint introuvable...</p>

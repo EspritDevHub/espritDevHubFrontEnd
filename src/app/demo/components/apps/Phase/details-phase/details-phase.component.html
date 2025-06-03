@@ -19,6 +19,13 @@
     <div *ngIf="progress !== undefined">
         <p>Progression de la phase : {{ progress | percent }}</p>
     </div>
+
+    <div class="dashboard-summary" *ngIf="dashboardSummary">
+        <p>Phases actives : {{ dashboardSummary['activePhases'] }}</p>
+        <p>Sprints en cours : {{ dashboardSummary['ongoingSprints'] }}</p>
+        <p>Événements à venir : {{ dashboardSummary['upcomingEvents'] }}</p>
+        <p>Annonces actives : {{ dashboardSummary['activeAnnouncements'] }}</p>
+    </div>
 </div>
 
 <div *ngIf="!phase">

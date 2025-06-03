@@ -18,6 +18,7 @@ import {SprintService} from "../../../../service/sprint.service";
 })
 export class SprintDetailsComponent implements OnInit {
     sprint?: Sprint;
+    currentSprints: Sprint[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -31,6 +32,10 @@ export class SprintDetailsComponent implements OnInit {
                 this.sprint = data;
             });
         }
+        this.sprintService.getCurrentSprints().subscribe({
+            next: (sprints) => (this.currentSprints = sprints),
+            error: (err) => console.error('Erreur lors de la récupération des sprints en cours', err)
+        });
     }
 }
 

@@ -31,4 +31,8 @@ export class SprintService {
     delete(id: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/${id}`);
     }
+
+    getCurrentSprints(): Observable<Sprint[]> {
+        return this.http.get<Sprint[]>(`${this.baseUrl}/current`);
+    }
 }

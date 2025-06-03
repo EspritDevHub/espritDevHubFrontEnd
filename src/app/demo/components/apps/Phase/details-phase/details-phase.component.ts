@@ -4,7 +4,12 @@ import {DatePipe} from "@angular/common";
 import { CommonModule } from '@angular/common';
 import {PhaseService} from "../../../../service/phase.service";
 import {Phase} from "../../../../module/phase";
-
+interface DashboardSummary {
+    activePhases: number;
+    ongoingSprints: number;
+    upcomingEvents: number;
+    activeAnnouncements: number;
+}
 @Component({
     selector: 'app-details-project',
     standalone: true,
@@ -20,6 +25,8 @@ export class PhaseDetailsComponent implements OnInit {
     phase!: Phase | null;
     phaseId!: string | null;
     progress?: number;
+    dashboardSummary: { [key: string]: number } = {};
+
     constructor(
         private route: ActivatedRoute,
         private phaseService: PhaseService
@@ -37,6 +44,7 @@ export class PhaseDetailsComponent implements OnInit {
         } else {
             this.phase = null;
         }
+        this.loadDashboardSummary();
         this.loadProgress();
 
     }
@@ -45,6 +53,14 @@ export class PhaseDetailsComponent implements OnInit {
         this.phaseService.getPhaseProgress(this.route.snapshot.paramMap.get('id')).subscribe({
             next: (value) => this.progress = value,
             error: (err) => console.error('Erreur lors du chargement de la progression', err)
+        });
+    }
+    loadDashboardSummary() {
+        this.phaseService.getDashboardSummary().subscribe({
+            next: summary => {
+                this.dashboardSummary = summary;
+            },
+            error: err => console.error('Erreur chargement dashboard summary', err)
         });
     }
 }

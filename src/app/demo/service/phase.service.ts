@@ -36,4 +36,8 @@ export class PhaseService {
     getPhaseProgress(phaseId: string | null): Observable<number> {
         return this.http.get<number>(`${this.baseUrl}/${phaseId}/progress`);
     }
+
+    getDashboardSummary(): Observable<{ [key: string]: number }> {
+        return this.http.get<{ [key: string]: number }>(`${this.baseUrl}/dashboard-summary`);
+    }
 }
