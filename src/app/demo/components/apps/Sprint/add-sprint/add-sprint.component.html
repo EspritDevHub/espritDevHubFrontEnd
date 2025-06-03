@@ -79,19 +79,24 @@
                 <!-- Statut -->
                 <div class="mb-4">
                     <label for="status" class="block text-900 font-semibold mb-2">Statut</label>
-                    <input
-                        pInputText
-                        type="text"
+                    <select
                         id="status"
                         name="status"
                         [(ngModel)]="sprint.status"
                         #status="ngModel"
                         required
-                    />
+                        class="p-inputtext p-component"
+                    >
+                        <option value="" disabled>-- Sélectionnez un statut --</option>
+                        <option value="Completed">Completed</option>
+                        <option value="En cours">En cours</option>
+                        <option value="terminé">terminé</option>
+                    </select>
                     <small class="text-red-500" *ngIf="status.invalid && status.touched">
                         Le statut est requis.
                     </small>
                 </div>
+
 
                 <!-- Actif -->
                 <div class="mb-4">

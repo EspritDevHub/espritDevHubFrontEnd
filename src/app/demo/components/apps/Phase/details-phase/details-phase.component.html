@@ -1,0 +1,26 @@
+<div *ngIf="phase">
+    <h2>Détails de la phase : {{ phase.name }}</h2>
+
+    <p><strong>Description :</strong> {{ phase.description || 'Non définie' }}</p>
+
+    <p><strong>Date de début :</strong> {{ phase.startDate | date: 'short' }}</p>
+
+    <p><strong>Date de fin :</strong> {{ phase.endDate | date: 'short' }}</p>
+
+    <p><strong>État :</strong>
+        <span class="badge"
+              [ngClass]="{
+            'bg-green-500': phase.isActive,
+            'bg-red-500': !phase.isActive
+          }">
+      {{ phase.isActive ? 'Actif' : 'Inactif' }}
+    </span>
+    </p>
+    <div *ngIf="progress !== undefined">
+        <p>Progression de la phase : {{ progress | percent }}</p>
+    </div>
+</div>
+
+<div *ngIf="!phase">
+    <p>Phase introuvable...</p>
+</div>

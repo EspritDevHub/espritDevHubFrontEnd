@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
         { path: 'event', data: { breadcrumb: 'Event' }, loadChildren: () => import('./Event/event.module').then(m => m.EventModule) },
         { path: 'annoc', data: { breadcrumb: 'Annoc' }, loadChildren: () => import('./Anouncement/annoc.module').then(m => m.AnnocModule) },
         { path: 'sprint', data: { breadcrumb: 'Sprint' }, loadChildren: () => import('./Sprint/sprint.module').then(m => m.SprintModule) },
+        { path: 'phase', data: { breadcrumb: 'Phase' }, loadChildren: () => import('./Phase/phase.module').then(m => m.PhaseModule) },
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

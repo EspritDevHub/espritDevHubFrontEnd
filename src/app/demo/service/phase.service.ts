@@ -32,4 +32,8 @@ export class PhaseService {
     delete(id: string): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/${id}`);
     }
+
+    getPhaseProgress(phaseId: string | null): Observable<number> {
+        return this.http.get<number>(`${this.baseUrl}/${phaseId}/progress`);
+    }
 }

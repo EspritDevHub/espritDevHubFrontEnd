@@ -4,6 +4,6 @@ export interface Phase {
     description: string;
     startDate: string;
     endDate: string;
-    active: boolean;
+    isActive: boolean;
 }
 
