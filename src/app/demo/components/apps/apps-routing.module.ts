@@ -12,6 +12,9 @@ import { RouterModule } from '@angular/router';
         { path: 'projet', data: { breadcrumb: 'Projet' }, loadChildren: () => import('./Projet/projet.module').then(m => m.ProjetModule) },
         { path: 'tache', data: { breadcrumb: 'Tache' }, loadChildren: () => import('./Tache/tache.module').then(m => m.TacheModule) },
         { path: 'blog', data: { breadcrumb: 'Blog' }, loadChildren: () => import('./blog/blog.app.module').then(m => m.BlogAppModule) },
+
+
+
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

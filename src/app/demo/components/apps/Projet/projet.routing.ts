@@ -4,6 +4,7 @@ import {ListProjectComponent} from "./list-project/list-project.component";
 import {AddProjectComponent} from "./add-project/add-project.component";
 import {DetailsProjectComponent} from "./details-project/details-project.component";
 import {EditProjectComponent} from "./edit-project/edit-project.component";
+import {KanbanComponent} from "./kanban/kanban.component";
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -11,6 +12,7 @@ import {EditProjectComponent} from "./edit-project/edit-project.component";
         { path: 'add', component: AddProjectComponent },
         { path: 'details/:id', component: DetailsProjectComponent },
         { path: 'edit/:id', component: EditProjectComponent },
+        {path:'kanban-projet',component:KanbanComponent},
 
         //{ path: 'list', data: { breadcrumb: 'List' }, loadChildren: () => import('./list-project/list-project.component').then(m => m.BlogListModule) },
         // { path: 'detail', data: { breadcrumb: 'Detail' }, loadChildren: () => import('./blog-detail/blog-detail.module').then(m => m.BlogDetailModule) },

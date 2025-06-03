@@ -18,6 +18,14 @@ export class ProjetService {
             catchError(this.handleError)
         );
     }
+    getProjetsParEtatKanban(): Observable<{ [etat: string]: Projet[] }> {
+        return this.http.get<{ [etat: string]: Projet[] }>(`${this.apiUrl}/kanban`);
+    }
+
+    updateEtatEtOrdre(id: string, etat: string, ordre: number): Observable<Projet> {
+        return this.http.put<Projet>(`${this.apiUrl}/kanban/${id}?etat=${etat}&ordre=${ordre}`, {});
+    }
+
     getRisqueRetard(id: string) {
         return this.http.get<{ score: number; interpretation: string }>(`${this.apiUrl}/${id}/risque-retard`);
     }

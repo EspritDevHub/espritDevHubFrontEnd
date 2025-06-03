@@ -1,0 +1,76 @@
+.kanban-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.kanban-column {
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    min-height: 300px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .kanban-title {
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 12px;
+        text-transform: capitalize;
+    }
+
+    .kanban-list {
+        min-height: 200px;
+        padding: 5px;
+        border-radius: 6px;
+    }
+
+    .kanban-item {
+        padding: 10px;
+        margin-bottom: 8px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        cursor: grab;
+    }
+}
+
+// 🎨 Styles spécifiques par état
+.en_attente {
+    background-color: #fff8e1;
+    border-color: #ffecb3;
+
+    .kanban-title {
+        color: #ff9800;
+    }
+}
+
+.en_cours {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+
+    .kanban-title {
+        color: #2196f3;
+    }
+}
+
+.non_commence {
+    background-color: #eeeeee;
+    border-color: #bdbdbd;
+
+    .kanban-title {
+        color: #616161;
+    }
+}
+
+.termine {
+    background-color: #e8f5e9;
+    border-color: #a5d6a7;
+
+    .kanban-title {
+        color: #4caf50;
+    }
+}
