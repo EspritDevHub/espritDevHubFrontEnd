@@ -11,7 +11,7 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
         this.model = [
-        
+
             {
                 label: 'Seances et Notes',
                 icon: 'pi pi-th-large',
@@ -42,7 +42,7 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-    
+
                     {
                         label: 'Document',
                         icon: 'pi pi-fw pi-comment',
@@ -69,8 +69,8 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-                  
-                  
+
+
                 ]
             },
              {
@@ -88,9 +88,9 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-calendar',
                         routerLink: ['/seance']
                     },
-                 
-                  
-                  
+
+
+
                 ]
             },
             {
@@ -168,8 +168,24 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-         
-           
+                    {
+                        label: 'Evenement',
+                        icon: 'pi pi-fw pi-comment',
+                        items: [
+                            {
+                                label: 'List',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/event/list']
+                            },
+                            {
+                                label: 'Add',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/apps/event/add']
+                            }
+                        ]
+                    },
+
+
         ];
     }
 }

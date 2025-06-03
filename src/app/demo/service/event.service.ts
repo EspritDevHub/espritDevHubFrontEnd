@@ -1,15 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Event } from '../module/event';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class EventService {
 
-    constructor(private http: HttpClient) { }
+    private baseUrl = 'http://localhost:9091/api/event';
 
-    getEvents() {
-        return this.http.get<any>('assets/demo/data/scheduleevents.json')
-            .toPromise()
-            .then(res => res.data as any[])
-            .then(data => data);
+    constructor(private http: HttpClient) {}
+
+    getAll(): Observable<Event[]> {
+        return this.http.get<Event[]>(this.baseUrl+"/getAll");
+    }
+
+    getById(id: string): Observable<Event> {
+        return this.http.get<Event>(`${this.baseUrl}/get/${id}`);
+    }
+
+    create(event: Event): Observable<Event> {
+        return this.http.post<Event>(this.baseUrl+"/add", event);
+    }
+
+    update(id: string, event: Event): Observable<Event> {
+        return this.http.put<Event>(`${this.baseUrl}/update/${id}`, event);
+    }
+
+    delete(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
     }
 }

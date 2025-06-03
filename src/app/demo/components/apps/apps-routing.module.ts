@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
         { path: 'criteres', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-notes/CritereEvaluation/critere-evaluation.module').then(m => m.CriteresModule) },
         { path: 'seances', data: { breadcrumb: 'Apps' },loadChildren: () => import('../../../gestion-notes/seance/seance.module').then(m => m.SeanceModule) },
-      
+
         { path: 'notes', data: { breadcrumb: 'Apps' },loadChildren: () => import('../../../gestion-notes/note/note/note.module').then(m => m.NoteModule) },
         { path: 'assignment', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-document/assignment/assignment/assignment.module').then(m => m.AssignmentModule) },
         { path: 'documents', data: { breadcrumb: 'Apps' }, loadChildren: () => import('../../../gestion-document/document/document/document.module').then(m => m.DocumentModule) },
@@ -29,6 +29,7 @@ import { RouterModule } from '@angular/router';
         { path: 'projet', data: { breadcrumb: 'Projet' }, loadChildren: () => import('./Projet/projet.module').then(m => m.ProjetModule) },
         { path: 'tache', data: { breadcrumb: 'Tache' }, loadChildren: () => import('./Tache/tache.module').then(m => m.TacheModule) },
         { path: 'blog', data: { breadcrumb: 'Blog' }, loadChildren: () => import('./blog/blog.app.module').then(m => m.BlogAppModule) },
+        { path: 'event', data: { breadcrumb: 'Event' }, loadChildren: () => import('./Event/event.module').then(m => m.EventModule) },
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

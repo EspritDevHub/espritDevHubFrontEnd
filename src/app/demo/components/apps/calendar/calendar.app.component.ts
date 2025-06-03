@@ -38,7 +38,7 @@ export class CalendarAppComponent implements OnInit {
     ngOnInit(): void {
         this.today = '2022-05-11';
 
-        this.eventService.getEvents().then(events => {
+        this.eventService.getAll().subscribe(events  => {
             this.events = events;
             this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
             this.tags = this.events.map(item => item.tag);
