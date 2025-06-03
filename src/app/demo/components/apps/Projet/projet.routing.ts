@@ -12,7 +12,7 @@ import {KanbanComponent} from "./kanban/kanban.component";
         { path: 'add', component: AddProjectComponent },
         { path: 'details/:id', component: DetailsProjectComponent },
         { path: 'edit/:id', component: EditProjectComponent },
-        {path:'kanban-projet',component:KanbanComponent},
+        {path:'kanbanProjet',component:KanbanComponent},
 
         //{ path: 'list', data: { breadcrumb: 'List' }, loadChildren: () => import('./list-project/list-project.component').then(m => m.BlogListModule) },
         // { path: 'detail', data: { breadcrumb: 'Detail' }, loadChildren: () => import('./blog-detail/blog-detail.module').then(m => m.BlogDetailModule) },

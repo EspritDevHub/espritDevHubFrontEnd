@@ -1,6 +1,11 @@
+<!-- Debug: Plain Display of the Data -->
+
+
+<!-- Kanban Display -->
 <div class="kanban-container">
     <div class="kanban-column" *ngFor="let col of kanbanColumns | keyvalue" [ngClass]="col.key">
         <h3 class="kanban-title">{{ col.key.replace('_', ' ').toUpperCase() }}</h3>
+
         <div
             cdkDropList
             [cdkDropListData]="col.value"
@@ -13,8 +18,8 @@
                 cdkDrag
                 [cdkDragData]="projet"
             >
-                <strong>{{ projet.titre }}</strong><br />
-                {{ projet.description || 'Pas de description' }}
+                <p class="kanban-item-title">{{ projet.titre }}</p>
+                <p class="kanban-item-desc">{{ projet.description || 'Pas de description' }}</p>
             </div>
         </div>
     </div>

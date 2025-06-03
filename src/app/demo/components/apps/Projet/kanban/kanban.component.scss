@@ -3,6 +3,7 @@
     gap: 20px;
     padding: 20px;
     overflow-x: auto;
+    background-color: #1e1e2f; // dark background for the container
 }
 
 .kanban-column {
@@ -10,8 +11,9 @@
     border-radius: 10px;
     width: 300px;
     min-height: 300px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #444;
+    background-color: #2e2e40; // dark column background
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
     .kanban-title {
         text-align: center;
@@ -19,6 +21,7 @@
         font-weight: bold;
         margin-bottom: 12px;
         text-transform: capitalize;
+        color: #fff;
     }
 
     .kanban-list {
@@ -30,47 +33,48 @@
     .kanban-item {
         padding: 10px;
         margin-bottom: 8px;
-        background-color: #fff;
-        border: 1px solid #ddd;
+        background-color: #800909;
+        border: 1px solid #810808;
         border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         cursor: grab;
     }
 }
 
-// 🎨 Styles spécifiques par état
+// 🎨 Column-specific background colors (adjusted for dark theme)
 .en_attente {
-    background-color: #fff8e1;
-    border-color: #ffecb3;
+    background-color: #947e00; // dark gold
+    border-color: #bfa200;
 
     .kanban-title {
-        color: #ff9800;
+        color: #ffd700;
     }
 }
 
 .en_cours {
-    background-color: #e3f2fd;
-    border-color: #90caf9;
+    background-color: #1b1b6e;
+    border-color: #3c8df2;
 
     .kanban-title {
-        color: #2196f3;
+        color: #42a5f5;
     }
 }
 
 .non_commence {
-    background-color: #eeeeee;
-    border-color: #bdbdbd;
+    background-color: #5b0f0f;
+    border-color: #a00000;
 
     .kanban-title {
-        color: #616161;
+        color: #f44336;
     }
 }
 
 .termine {
-    background-color: #e8f5e9;
-    border-color: #a5d6a7;
+    background-color: #0e4b0e;
+    border-color: #4caf50;
 
     .kanban-title {
-        color: #4caf50;
+        color: #81c784;
     }
 }

@@ -60,6 +60,10 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Add',
                                 icon: 'pi pi-fw pi-image',
                                 routerLink: ['/apps/projet/add']
+                            },{
+                                 label: 'kanban Projet',
+                                icon: 'pi pi-fw pi-image',
+                                routerLink: ['/apps/projet/kanbanProjet']
                             }
                         ]
                     },
