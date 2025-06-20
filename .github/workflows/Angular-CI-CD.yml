@@ -45,9 +45,15 @@ jobs:
           sudo docker login -u jobrane23 -p PI23381121
           sudo docker push jobrane23/esprit-frontend:latest
 
+      - name: Zip Angular dist folder
+        run: |
+          cd dist
+          zip -r esprit-frontend.zip *
+          mv esprit-frontend.zip ../
+
       - name: Upload dist folder to Nexus
         run: |
           curl -v -u "admin:1234" \
-          --upload-file dist/esprit-frontend.zip \
+          --upload-file esprit-frontend.zip \
           http://192.168.79.129:8081/repository/frontend-artifacts/esprit-frontend.zip
         shell: bash
