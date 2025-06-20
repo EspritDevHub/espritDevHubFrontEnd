@@ -44,3 +44,10 @@ jobs:
         run: |
           sudo docker login -u jobrane23 -p PI23381121
           sudo docker push jobrane23/esprit-frontend:latest
+
+      - name: Upload dist folder to Nexus
+        run: |
+          curl -v -u "admin:1234" \
+          --upload-file dist/esprit-frontend.zip \
+          http://192.168.79.129:8081/repository/frontend-artifacts/esprit-frontend.zip
+        shell: bash
