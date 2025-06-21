@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SprintService {
-  private apiUrl = 'http://localhost:9097/api/criteres/sprints'; // URL for sprint data
+  private apiUrl = 'http://192.168.79.129:9097/api/criteres/sprints'; // URL for sprint data
 
   constructor(private http: HttpClient) {}
 
