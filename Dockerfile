@@ -11,7 +11,7 @@ RUN npm run build -- --configuration=production
 
 FROM nginx:stable-alpine AS production-stage
 
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist/atlantis-ng /usr/share/nginx/html
 
 EXPOSE 80
 
